@@ -59,11 +59,11 @@ gyro = new AnalogGyro(0);
  addChild("Gyro",gyro);
  gyro.setSensitivity(0.007);
 
-leftEncoder = new Encoder(0, 1, false, EncodingType.k4X);
+leftEncoder = new Encoder(0, 1, true, EncodingType.k4X);
  addChild("Left Encoder",leftEncoder);
  leftEncoder.setDistancePerPulse(1.0);
 
-rightEncoder = new Encoder(2, 3, true, EncodingType.k4X);
+rightEncoder = new Encoder(2, 3, false, EncodingType.k4X);
  addChild("Right Encoder",rightEncoder);
  rightEncoder.setDistancePerPulse(1.0);
 
@@ -76,15 +76,20 @@ rightEncoder = new Encoder(2, 3, true, EncodingType.k4X);
     leftFollowMotorController = new CANSparkMax(1, CANSparkMax.MotorType.kBrushless);
     leftFollowMotorController.restoreFactoryDefaults();
 
+    leftFollowMotorController.follow(leftLeadMotorController);
+
+    leftMotorControllerGroup = new MotorControllerGroup(leftLeadMotorController, leftFollowMotorController);
+    addChild("Left Motor Controller Group", leftMotorControllerGroup);
+    leftMotorControllerGroup.setInverted(true);
+
+
     rightLeadMotorController = new CANSparkMax(2, CANSparkMax.MotorType.kBrushless);
     rightLeadMotorController.restoreFactoryDefaults();
 
     rightFollowMotorController = new CANSparkMax(3, CANSparkMax.MotorType.kBrushless);
     rightFollowMotorController.restoreFactoryDefaults();
 
-    leftMotorControllerGroup = new MotorControllerGroup(leftLeadMotorController, leftFollowMotorController);
-    addChild("Left Motor Controller Group", leftMotorControllerGroup);
-    leftMotorControllerGroup.setInverted(true);
+    rightFollowMotorController.follow(rightLeadMotorController);
 
     rightMotorControllerGroup = new MotorControllerGroup(rightLeadMotorController, rightFollowMotorController);
     addChild("Right Motor Controller Group", rightMotorControllerGroup);
