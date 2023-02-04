@@ -27,6 +27,24 @@ public class Constants {
     *   public static final int kRightMotor1Port = 2;
     *   public static final int kRightMotor2Port = 3; 
     * }
-    */ 
+    */
+
+    public static final class LevelPID {
+        public static final double P = 0.08;
+        public static final double I = 0.0;
+        public static final double D = 0.0;
+        public static final double f = 0.0;
+        public static final double LevelTolerance = 0.5; // Measured in degrees
+        public static final double Level = 1;
+    }
+
+    public static final class MovePID {
+        public static final double P = 1.0;
+        public static final double I = 0.0;
+        public static final double D = 0.0;
+        public static final double f = 0.0;
+        public static final double MaxAlignSpeed = 2; // Inches per second
+        public static final double AlignTolerance = 0.01; // Meters
+    }
 }
 

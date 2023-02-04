@@ -33,7 +33,8 @@ public class OpenManipulator extends SequentialCommandGroup {
     addCommands(
         new InstantCommand(pneumatics::setDoubleForward),
         new WaitCommand(0.5),
-        new InstantCommand(pneumatics::setDoubleOFF));
+        new InstantCommand(pneumatics::setDoubleOFF)
+        );
     }
 
     @Override
