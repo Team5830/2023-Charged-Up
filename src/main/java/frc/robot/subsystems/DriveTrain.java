@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup; 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.DriveConstants;
 
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -69,11 +70,11 @@ public class DriveTrain extends SubsystemBase {
     try{
       ahrs = new AHRS(SerialPort.Port.kUSB1);
 
-      leftLeadMotorController = new CANSparkMax(2 , CANSparkMax.MotorType.kBrushless);
+      leftLeadMotorController = new CANSparkMax(DriveConstants.kLeftMotor1Port , CANSparkMax.MotorType.kBrushless);
       leftLeadMotorController.restoreFactoryDefaults();
       leftLeadEncoder = leftLeadMotorController.getEncoder();
       leftLeadEncoder.setPositionConversionFactor(18.84*2.54/8.33);
-      leftFollowMotorController = new CANSparkMax(4, CANSparkMax.MotorType.kBrushless);
+      leftFollowMotorController = new CANSparkMax(DriveConstants.kLeftMotor2Port, CANSparkMax.MotorType.kBrushless);
       leftFollowMotorController.restoreFactoryDefaults();
       leftFollowEncoder = leftFollowMotorController.getEncoder();
 
@@ -84,11 +85,11 @@ public class DriveTrain extends SubsystemBase {
       //leftMotorControllerGroup.setInverted(true);
 
 
-      rightLeadMotorController = new CANSparkMax(3, CANSparkMax.MotorType.kBrushless);
+      rightLeadMotorController = new CANSparkMax(DriveConstants.kRightMotor1Port, CANSparkMax.MotorType.kBrushless);
       rightLeadMotorController.restoreFactoryDefaults();
       rightLeadEncoder = rightLeadMotorController.getEncoder();
       rightLeadEncoder.setPositionConversionFactor(18.84*2.54/8.33);
-      rightFollowMotorController = new CANSparkMax(6, CANSparkMax.MotorType.kBrushless);
+      rightFollowMotorController = new CANSparkMax(DriveConstants.kRightMotor2Port, CANSparkMax.MotorType.kBrushless);
       rightFollowMotorController.restoreFactoryDefaults();
       rightFollowEncoder = rightFollowMotorController.getEncoder();
 

@@ -20,14 +20,16 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public class Constants {
-   /**
-    * public static final class DriveConstants {
-    *   public static final int kLeftMotor1Port = 0;
-    *   public static final int kLeftMotor2Port = 1;
-    *   public static final int kRightMotor1Port = 2;
-    *   public static final int kRightMotor2Port = 3; 
-    * }
-    */
+   
+     public static final class DriveConstants {
+       public static final int kLeftMotor1Port = 2;
+       public static final int kLeftMotor2Port = 4;
+       public static final int kRightMotor1Port = 3;
+       public static final int kRightMotor2Port = 6;
+       public static final int karmoter = 1;
+       public static final int kwristmoter = 5;
+     }
+    
 
     public static final class LevelPID {
         public static final double P = 0.08;
@@ -45,6 +47,22 @@ public class Constants {
         public static final double f = 0.0;
         public static final double MaxAlignSpeed = 2; // Inches per second
         public static final double AlignTolerance = 0.01; // Meters
+    }
+
+    public static final class ArmPID {
+        public static final double P = .3;
+        public static final double I = 0;
+        public static final double D = 0;
+        public static final double MaxOutuput = .7;
+        public static final double MinOutput = -.7;
+    }
+
+    public static final class WristPID {
+        public static final double P = .3;
+        public static final double I = 0;
+        public static final double D = 0;
+        public static final double MaxOutuput = .7;
+        public static final double MinOutput = -.7;
     }
 }
 
