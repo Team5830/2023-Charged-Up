@@ -29,14 +29,16 @@ public class Arm extends SubsystemBase {
         wristMotorController.restoreFactoryDefaults();
         wristEncoder = armMotorController.getEncoder();
         wristEncoder.setPositionConversionFactor(8);
+        m_karmoterPID = armMotorController.getPIDController();
         m_karmoterPID.setP(ArmPID.P);
         m_karmoterPID.setI(ArmPID.I);
         m_karmoterPID.setD(ArmPID.D);
         m_karmoterPID.setOutputRange(ArmPID.MinOutput, ArmPID.MaxOutuput);
-        m_kwristmoterPID.setP(WristPID.P);
-        m_kwristmoterPID.setI(WristPID.I);
-        m_kwristmoterPID.setD(WristPID.D);
+        m_karmoterPID.setPositionPIDWrappingMaxInput(360);
+        m_karmoterPID.setPositionPIDWrappingEnabled(true);
+
         m_kwristmoterPID.setOutputRange(WristPID.MinOutput, WristPID.MaxOutuput);
+        
     }catch (RuntimeException ex) {
         DriverStation.reportError("Error Configuring Drivetrain" + ex.getMessage(), true);
     }
@@ -48,5 +50,11 @@ public class Arm extends SubsystemBase {
     public void moveWrist() {
         wristarget = 90.0;
         m_kwristmoterPID.setReference(wristarget, ControlType.kPosition);    
+    }
+
+    @Override
+    public void periodic(){
+        SmartDashboard.putNumber("ArmPosition", armEncoder.getPosition());
+        SmartDashboard.putNumber("WristPosition", wristEncoder.getPosition());
     }
 }
