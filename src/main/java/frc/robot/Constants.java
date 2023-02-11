@@ -53,8 +53,11 @@ public class Constants {
         public static final double P = .3;
         public static final double I = 0;
         public static final double D = 0;
-        public static final double MaxOutuput = .7;
-        public static final double MinOutput = -.7;
+        public static final double FF = 0;
+        public static final double MaxOutput = .4;
+        public static final double MinOutput = -.4;
+        public static final float ArmForwardLimit = 90;
+        public static final float ArmReverseLimit = 0;
     }
 
     public static final class WristPID {
@@ -62,7 +65,7 @@ public class Constants {
         public static final double I = 0;
         public static final double D = 0;
         public static final double MaxOutuput = .7;
-        public static final double MinOutput = -.7;
+        public static final double MinOutuput = -.7;
     }
 }
 
