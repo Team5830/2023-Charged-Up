@@ -23,10 +23,10 @@ public class Arm extends SubsystemBase {
         armEncoder = armMotorController.getEncoder();
         armEncoder.setPositionConversionFactor(8);
         armEncoder.setPosition(0.0);
-        armMotorController.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
-        armMotorController.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);    
-        armMotorController.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, ArmPID.ForwardLimit);
-        armMotorController.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, ArmPID.ReverseLimit);
+        //armMotorController.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
+        //armMotorController.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);    
+        //armMotorController.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, ArmPID.ForwardLimit);
+        //armMotorController.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, ArmPID.ReverseLimit);
         
         m_karmoterPID = armMotorController.getPIDController();
         m_karmoterPID.setP(ArmPID.P);
