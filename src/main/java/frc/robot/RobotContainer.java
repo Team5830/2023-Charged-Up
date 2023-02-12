@@ -42,7 +42,7 @@ public class RobotContainer {
     public final Pneumatics m_pneumatics = new Pneumatics();
     public final DriveTrain m_driveTrain = new DriveTrain();
     public final Arm m_arm = new Arm();
-    //public final Wrist m_wrist = new Wrist();
+    public final Wrist m_wrist = new Wrist();
 
 // Joysticks
 private final Joystick rightJoystick = new Joystick(1);
@@ -70,14 +70,14 @@ private final Joystick leftJoystick = new Joystick(0);
     SmartDashboard.putData("Open Manipulator", new OpenManipulator( m_pneumatics ));
     SmartDashboard.putData("Close Manipulator", new CloseManipulator( m_pneumatics ));
     SmartDashboard.putData("moveArm", new MoveArmDash(m_arm));
-    SmartDashboard.putData("moveArm_fixed", new MoveArm(90,m_arm));
-    //SmartDashboard.putData("moveWrist", new MoveWristDash(m_wrist));
+    //SmartDashboard.putData("moveArm_fixed", new MoveArm(90,m_arm));
+    SmartDashboard.putData("moveWrist", new MoveWristDash(m_wrist));
     SmartDashboard.putNumber("ArmTarget", 0);
     SmartDashboard.putNumber("Arm P", Constants.ArmPID.P);
     SmartDashboard.putNumber("Arm I", Constants.ArmPID.I);
     SmartDashboard.putNumber("Arm D", Constants.ArmPID.D);
     SmartDashboard.putNumber("Arm FF", Constants.ArmPID.FF);
-    SmartDashboard.putNumber("Wristarget", 0);
+    SmartDashboard.putNumber("WristTarget", 0);
     SmartDashboard.putNumber("Wrist P", Constants.WristPID.P);
     SmartDashboard.putNumber("Wrist I", Constants.WristPID.I);
     SmartDashboard.putNumber("Wrist D", Constants.WristPID.D);

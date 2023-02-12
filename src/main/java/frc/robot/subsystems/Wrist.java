@@ -22,13 +22,13 @@ public class Wrist extends SubsystemBase {
         wristMotorController = new CANSparkMax(DriveConstants.kwristmoter , CANSparkMax.MotorType.kBrushless);
         wristMotorController.restoreFactoryDefaults();
         wristEncoder = wristMotorController.getEncoder();
-        wristEncoder.setPositionConversionFactor(8/9);
+        wristEncoder.setPositionConversionFactor(80);
         wristEncoder.setPosition(0.0);
-        m_kwristmoterPID.setOutputRange(WristPID.MinOutput, WristPID.MaxOutput);
         wristMotorController.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
         wristMotorController.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);    
         wristMotorController.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, WristPID.ForwardLimit);
         wristMotorController.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, WristPID.ReverseLimit);
+        wristMotorController.setIdleMode(CANSparkMax.IdleMode.kBrake);
         
 
         m_kwristmoterPID = wristMotorController.getPIDController();
@@ -68,15 +68,21 @@ public class Wrist extends SubsystemBase {
     }
     public boolean AtTarget(){
         double curposition = wristEncoder.getPosition();
+        DriverStation.reportWarning(String.format("Position: %f",curposition),false);
         if ( Math.abs(curposition - wristarget) <=WristPID.Tolerance){
-            wristMotorController.stopMotor();
+            DriverStation.reportWarning("True",false);
             return true;
         }else{
+            DriverStation.reportWarning(String.format("false: %f",Math.abs(curposition - wristarget)),false);
             return false;
         }
     }
     public double Position(){
         return wristEncoder.getPosition();
+    }
+
+    public void Stop(){
+        wristMotorController.stopMotor();
     }
 
     @Override
