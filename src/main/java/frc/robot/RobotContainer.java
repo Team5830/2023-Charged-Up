@@ -62,6 +62,7 @@ private final Joystick leftJoystick = new Joystick(0);
     // Smartdashboard Subsystems
     SmartDashboard.putData(m_pneumatics);
     SmartDashboard.putData(m_driveTrain);
+    SmartDashboard.putData(m_arm);
 
 
     // SmartDashboard Buttons
@@ -69,6 +70,7 @@ private final Joystick leftJoystick = new Joystick(0);
     SmartDashboard.putData("Open Manipulator", new OpenManipulator( m_pneumatics ));
     SmartDashboard.putData("Close Manipulator", new CloseManipulator( m_pneumatics ));
     SmartDashboard.putData("moveArm", new MoveArmDash(m_arm));
+    SmartDashboard.putData("moveArm_fixed", new MoveArm(90,m_arm));
     //SmartDashboard.putData("moveWrist", new MoveWristDash(m_wrist));
     SmartDashboard.putNumber("ArmTarget", 0);
     SmartDashboard.putNumber("Arm P", Constants.ArmPID.P);

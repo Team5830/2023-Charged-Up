@@ -29,8 +29,12 @@ public class MoveArm extends CommandBase {
   //public void execute() {}
 
   // Called once the command ends or is interrupted.
-  //@Override
-  //public void end(boolean interrupted) {}
+  @Override
+  public void end(boolean interrupted) {
+    // Called once the command ends or is interrupted.
+    arm.Stop();
+    
+  }
 
   // Returns true when the command should end.
   @Override

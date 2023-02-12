@@ -23,10 +23,10 @@ public class Arm extends SubsystemBase {
         armEncoder = armMotorController.getEncoder();
         armEncoder.setPositionConversionFactor(8);
         armEncoder.setPosition(0.0);
-        //armMotorController.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
-        //armMotorController.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);    
-        //armMotorController.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, ArmPID.ForwardLimit);
-        //armMotorController.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, ArmPID.ReverseLimit);
+        armMotorController.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
+        armMotorController.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);    
+        armMotorController.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, ArmPID.ForwardLimit);
+        armMotorController.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, ArmPID.ReverseLimit);
         
         m_karmoterPID = armMotorController.getPIDController();
         m_karmoterPID.setP(ArmPID.P);
@@ -53,27 +53,36 @@ public class Arm extends SubsystemBase {
         double d = SmartDashboard.getNumber("Arm D", ArmPID.D);
         double ff = SmartDashboard.getNumber("Arm FF", ArmPID.FF);
         // if PID coefficients on SmartDashboard have changed, write new values to controller
-        if((p != P)) { m_karmoterPID.setP(p); P = p; }
+        if((p != P)) { m_karmoterPID.setP(p); P = p;  }
         if((i != I)) { m_karmoterPID.setI(i); I = i; }
         if((d != D)) { m_karmoterPID.setD(d); D = d; }
-        if((ff != kFF)) { m_karmoterPID.setFF(ff); kFF = ff; }   
+        if((ff != kFF)) { m_karmoterPID.setFF(ff); kFF = ff; }  
+        DriverStation.reportWarning("Updated PID", false);
     }
     
     public void move(double degrees) {
         armtarget = degrees;
-        m_karmoterPID.setReference(armtarget, ControlType.kPosition);    
+        m_karmoterPID.setReference(armtarget, ControlType.kPosition);
     }
     public boolean AtTarget(){
         double curposition = armEncoder.getPosition();
+        DriverStation.reportWarning(String.format("Position: %f",curposition),false);
         if ( Math.abs(curposition - armtarget) <=ArmPID.Tolerance){
-            armMotorController.stopMotor();
+            DriverStation.reportWarning("True",false);
             return true;
         }else{
+            DriverStation.reportWarning(String.format("false: %f",Math.abs(curposition - armtarget)),false);
             return false;
         }
     }
     public double Position(){
         return armEncoder.getPosition();
+    }
+
+    public void Stop(){
+        //armMotorController.set(0);
+        armMotorController.stopMotor();
+        SmartDashboard.putNumber("ArmPosition", armEncoder.getPosition());
     }
 
     @Override
