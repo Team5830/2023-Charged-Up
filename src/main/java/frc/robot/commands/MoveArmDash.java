@@ -1,37 +1,17 @@
-<<<<<<< HEAD
-package frc.robot.commands;
-import frc.robot.subsystems.Arm;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.CommandBase;
-
-public class MoveArm extends CommandBase{
-    private Arm m_arm;
-    public MoveArm( Arm arm_in) {
-        m_arm = arm_in;
-        addRequirements(m_arm);
-        m_arm.armtarget = SmartDashboard.getNumber("ArmTarget", 0);
-        m_arm.moveArm();
-    }
-    @Override
-    public boolean isFinished(){
-        return m_arm.atTarget();
-    }
-
-=======
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
+import frc.robot.commands.MoveArm;
 import frc.robot.subsystems.Arm;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class MoveArm extends CommandBase {
-  /** Creates a new MoveArm. */
+public class MoveArmDash extends CommandBase {
+  /** Creates a new MoveArmDash. */
   Arm arm;
-  double target;
-  public MoveArm(double degrees, Arm m_arm) {
-    target = degrees;
+  public MoveArmDash(Arm m_arm) {
     // Use addRequirements() here to declare subsystem dependencies.
     arm = m_arm;
     addRequirements(arm);
@@ -40,8 +20,8 @@ public class MoveArm extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    arm.updatePID();
-    arm.move(target);
+    double target = SmartDashboard.getNumber("ArmTarget", arm.Position());
+    new MoveArm(target, arm);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -57,5 +37,4 @@ public class MoveArm extends CommandBase {
   public boolean isFinished() {
     return arm.AtTarget();
   }
->>>>>>> ab4eb6f499f2ddcd4083987f3543491328963707
 }
