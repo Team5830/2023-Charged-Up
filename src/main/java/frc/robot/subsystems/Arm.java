@@ -27,7 +27,6 @@ public class Arm extends SubsystemBase {
         armMotorController.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);    
         armMotorController.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, ArmPID.ForwardLimit);
         armMotorController.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, ArmPID.ReverseLimit);
-        
         m_karmoterPID = armMotorController.getPIDController();
         m_karmoterPID.setP(ArmPID.P);
         P = ArmPID.P;

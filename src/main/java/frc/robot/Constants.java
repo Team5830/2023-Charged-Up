@@ -28,6 +28,7 @@ public class Constants {
        public static final int kRightMotor2Port = 6;
        public static final int karmoter = 1;
        public static final int kwristmoter = 5;
+       public static final double width = 27.0;
      }
     
 
