@@ -27,8 +27,11 @@ public class MoveArmDash extends CommandBase {
   }
 
   // Called every time the scheduler runs while the command is scheduled.
-  //@Override
-  //public void execute() {}
+  @Override
+  public void execute() {
+    double target = SmartDashboard.getNumber("ArmTarget", arm.Position());
+    arm.move(target);
+  }
 
   // Called once the command ends or is interrupted.
   //@Override
@@ -42,6 +45,7 @@ public class MoveArmDash extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return arm.AtTarget();
+    //return arm.AtTarget();
+    return false;
   }
 }

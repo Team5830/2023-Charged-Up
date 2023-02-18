@@ -34,7 +34,8 @@ public class MoveWrist extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return wrist.AtTarget();
+    //return wrist.AtTarget();
+    return false;
   }
 }
  

@@ -25,9 +25,9 @@ public class Constants {
        public static final int kLeftMotor1Port = 2;
        public static final int kLeftMotor2Port = 4;
        public static final int kRightMotor1Port = 3;
-       public static final int kRightMotor2Port = 6;
+       public static final int kRightMotor2Port = 5;
        public static final int karmoter = 1;
-       public static final int kwristmoter = 5;
+       public static final int kwristmoter = 6;
      }
     
 
@@ -50,9 +50,9 @@ public class Constants {
     }
 
     public static final class ArmPID {
-        public static final double P = .3;
-        public static final double I = 0;
-        public static final double D = 0;
+        public static final double P = .009;
+        public static final double I = 000003;
+        public static final double D = 03;
         public static final double FF = 0;
         public static final double MaxOutput = .4;
         public static final double MinOutput = -.4;
@@ -62,9 +62,9 @@ public class Constants {
     }
 
     public static final class WristPID {
-        public static final double P = .3;
-        public static final double I = 0;
-        public static final double D = 0;
+        public static final double P = .009;
+        public static final double I = .000003;
+        public static final double D = .03;
         public static final double FF = 0;
         public static final double MaxOutput = .7;
         public static final double MinOutput = -.7;

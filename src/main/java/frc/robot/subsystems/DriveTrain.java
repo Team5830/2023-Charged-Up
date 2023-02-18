@@ -24,6 +24,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SerialPort;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxPIDController;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -57,6 +58,8 @@ public class DriveTrain extends SubsystemBase {
     private RelativeEncoder leftFollowEncoder;
     private RelativeEncoder rightLeadEncoder;
     private RelativeEncoder rightFollowEncoder;
+    private SparkMaxPIDController m_drivetrainPIDcontleft;
+    private SparkMaxPIDController m_drivetrainPIDcontright;
     
     /**
     *
@@ -147,6 +150,9 @@ public class DriveTrain extends SubsystemBase {
         SmartDashboard.putNumber("Distance", getDistance());
         SmartDashboard.putNumber("rightposition", rightLeadEncoder.getPosition());
         SmartDashboard.putNumber("leftposition", leftLeadEncoder.getPosition());
+    }
+    public void brake() {
+
     }
 }
 

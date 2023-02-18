@@ -82,7 +82,7 @@ public class Wrist extends SubsystemBase {
     }
 
     public void Stop(){
-        wristMotorController.stopMotor();
+        wristMotorController.set(0);
     }
 
     @Override

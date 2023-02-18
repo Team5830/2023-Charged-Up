@@ -2,11 +2,41 @@
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
+      "/SmartDashboard/Arm": "Subsystem",
       "/SmartDashboard/Auto Mode": "String Chooser",
       "/SmartDashboard/Autonomous Command": "Command",
       "/SmartDashboard/Close Manipulator": "Command",
+      "/SmartDashboard/DriveTrain": "Subsystem",
       "/SmartDashboard/Open Manipulator": "Command",
-      "/SmartDashboard/Pneumatics": "Subsystem"
+      "/SmartDashboard/Pneumatics": "Subsystem",
+      "/SmartDashboard/moveArm": "Command",
+      "/SmartDashboard/moveWrist": "Command"
+    },
+    "windows": {
+      "/SmartDashboard/moveWrist": {
+        "window": {
+          "visible": true
+        }
+      }
+    }
+  },
+  "NetworkTables": {
+    "transitory": {
+      "LiveWindow": {
+        ".status": {
+          "open": true
+        },
+        "open": true
+      },
+      "Shuffleboard": {
+        "open": true
+      },
+      "SmartDashboard": {
+        "moveWrist": {
+          "open": true
+        },
+        "open": true
+      }
     }
   }
 }
