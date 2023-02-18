@@ -18,13 +18,15 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup; 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.*;
 
+import com.fasterxml.jackson.annotation.JacksonInject.Value;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SerialPort;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.CANSparkMax.ControlType;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -60,6 +62,8 @@ public class DriveTrain extends SubsystemBase {
     private RelativeEncoder rightFollowEncoder;
     private SparkMaxPIDController m_drivetrainPIDcontleft;
     private SparkMaxPIDController m_drivetrainPIDcontright;
+    private double lP,lI,lD,rP,rI,rD;
+    private double m_Value;
     
     /**
     *
@@ -80,6 +84,8 @@ public class DriveTrain extends SubsystemBase {
       leftFollowMotorController = new CANSparkMax(DriveConstants.kLeftMotor2Port, CANSparkMax.MotorType.kBrushless);
       leftFollowMotorController.restoreFactoryDefaults();
       leftFollowEncoder = leftFollowMotorController.getEncoder();
+      m_drivetrainPIDcontleft = leftLeadMotorController.getPIDController();
+      m_drivetrainPIDcontright = rightLeadMotorController.getPIDController();
 
       leftFollowMotorController.follow(leftLeadMotorController);
 
@@ -96,17 +102,37 @@ public class DriveTrain extends SubsystemBase {
       rightFollowMotorController.restoreFactoryDefaults();
       rightFollowEncoder = rightFollowMotorController.getEncoder();
 
+
       rightFollowMotorController.follow(rightLeadMotorController);
 
       rightMotorControllerGroup = new MotorControllerGroup(rightLeadMotorController, rightFollowMotorController);
       rightMotorControllerGroup.setInverted(true);
       m_drive = new DifferentialDrive(leftMotorControllerGroup, rightMotorControllerGroup);
+      m_drivetrainPIDcontleft.setP(MovePID.lP);
+      m_drivetrainPIDcontleft.setI(MovePID.lI);
+      m_drivetrainPIDcontleft.setD(MovePID.lD);
+      m_drivetrainPIDcontright.setP(MovePID.rP);
+      m_drivetrainPIDcontright.setI(MovePID.rI);
+      m_drivetrainPIDcontright.setD(MovePID.rD);
     } catch (RuntimeException ex) {
       DriverStation.reportError("Error Configuring Drivetrain" + ex.getMessage(), true);
     }
     addChild("Right Motor Controller Group", rightMotorControllerGroup);
     }
-
+    public void updatePID() {
+      double lp = SmartDashboard.getNumber("Left P", MovePID.lP);
+      double li = SmartDashboard.getNumber("Left I", MovePID.lI);
+      double ld = SmartDashboard.getNumber("Left D", MovePID.lD);
+      double rp = SmartDashboard.getNumber("Right P", MovePID.rP);
+      double ri = SmartDashboard.getNumber("Right I", MovePID.rI);
+      double rd = SmartDashboard.getNumber("Right D", MovePID.rD);
+      if((lp != lP)) { m_drivetrainPIDcontleft.setP(lp); lP = lp; }
+      if((li != lI)) { m_drivetrainPIDcontleft.setI(li); lI = li; }
+      if((ld != lD)) { m_drivetrainPIDcontleft.setD(ld); lD = ld; }
+      if((rp != rP)) { m_drivetrainPIDcontright.setP(rp); rP = rp; }
+      if((ri != rI)) { m_drivetrainPIDcontright.setI(ri); rI = ri; }
+      if((rd != rD)) { m_drivetrainPIDcontright.setD(rd); rD = rd; }
+    }
     public void TankDrive(double leftspeed, double rightspeed) {
         if (leftspeed > 1.0) {
           leftspeed = 1.0;
@@ -152,7 +178,14 @@ public class DriveTrain extends SubsystemBase {
         SmartDashboard.putNumber("leftposition", leftLeadEncoder.getPosition());
     }
     public void brake() {
-
+     double rightarget = rightLeadEncoder.getPosition();
+     double leftarget = leftLeadEncoder.getPosition();
+     m_drivetrainPIDcontleft.setReference(leftarget, ControlType.kPosition);
+     m_drivetrainPIDcontright.setReference(rightarget, ControlType.kPosition);
+    }
+    public void brakerelease(){
+       rightLeadMotorController.stopMotor();
+       leftLeadMotorController.stopMotor();
     }
 }
 
