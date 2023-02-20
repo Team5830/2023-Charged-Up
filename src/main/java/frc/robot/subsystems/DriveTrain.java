@@ -12,15 +12,11 @@
 
 package frc.robot.subsystems;
 
-
-import frc.robot.commands.*;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup; 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.*;
 
-import com.fasterxml.jackson.annotation.JacksonInject.Value;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SerialPort;
 import com.revrobotics.CANSparkMax;
@@ -77,11 +73,11 @@ public class DriveTrain extends SubsystemBase {
     try{
       ahrs = new AHRS(SerialPort.Port.kUSB1);
 
-      leftLeadMotorController = new CANSparkMax(DriveConstants.kLeftMotor1Port , CANSparkMax.MotorType.kBrushless);
+      leftLeadMotorController = new CANSparkMax(ValueConstants.kLeftMotor1Port , CANSparkMax.MotorType.kBrushless);
       leftLeadMotorController.restoreFactoryDefaults();
       leftLeadEncoder = leftLeadMotorController.getEncoder();
       leftLeadEncoder.setPositionConversionFactor(18.84*2.54/8.33);
-      leftFollowMotorController = new CANSparkMax(DriveConstants.kLeftMotor2Port, CANSparkMax.MotorType.kBrushless);
+      leftFollowMotorController = new CANSparkMax(ValueConstants.kLeftMotor2Port, CANSparkMax.MotorType.kBrushless);
       leftFollowMotorController.restoreFactoryDefaults();
       leftFollowEncoder = leftFollowMotorController.getEncoder();
       m_drivetrainPIDcontleft = leftLeadMotorController.getPIDController();
@@ -94,11 +90,11 @@ public class DriveTrain extends SubsystemBase {
       //leftMotorControllerGroup.setInverted(true);
 
 
-      rightLeadMotorController = new CANSparkMax(DriveConstants.kRightMotor1Port, CANSparkMax.MotorType.kBrushless);
+      rightLeadMotorController = new CANSparkMax(ValueConstants.kRightMotor1Port, CANSparkMax.MotorType.kBrushless);
       rightLeadMotorController.restoreFactoryDefaults();
       rightLeadEncoder = rightLeadMotorController.getEncoder();
       rightLeadEncoder.setPositionConversionFactor(18.84*2.54/8.33);
-      rightFollowMotorController = new CANSparkMax(DriveConstants.kRightMotor2Port, CANSparkMax.MotorType.kBrushless);
+      rightFollowMotorController = new CANSparkMax(ValueConstants.kRightMotor2Port, CANSparkMax.MotorType.kBrushless);
       rightFollowMotorController.restoreFactoryDefaults();
       rightFollowEncoder = rightFollowMotorController.getEncoder();
 

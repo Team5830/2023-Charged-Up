@@ -12,6 +12,7 @@
 
 package frc.robot;
 
+import frc.robot.Constants.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -42,6 +43,7 @@ public class RobotContainer {
     public final DriveTrain m_driveTrain = new DriveTrain();
     public final Arm m_arm = new Arm();
     public final Wrist m_wrist = new Wrist();
+    public final ExtendArm m_extension = new ExtendArm();
 
 // Joysticks
 private final Joystick rightJoystick = new Joystick(1);
@@ -72,6 +74,11 @@ private final Joystick leftJoystick = new Joystick(0);
     //SmartDashboard.putData("moveArm_fixed", new MoveArm(90,m_arm));
     SmartDashboard.putData("moveWrist", new MoveWristDash(m_wrist));
     SmartDashboard.putData("Brake", new Brake(m_driveTrain));
+    SmartDashboard.putData("Position1", new Positioning(m_arm,m_wrist,m_extension, Position1.armAngle, Position1.wristAngle, Position1.extensionDistance));
+    SmartDashboard.putData("Position2", new Positioning(m_arm,m_wrist,m_extension, Position2.armAngle, Position2.wristAngle, Position2.extensionDistance));
+    SmartDashboard.putData("Position3", new Positioning(m_arm,m_wrist,m_extension, Position3.armAngle, Position3.wristAngle, Position3.extensionDistance));
+    SmartDashboard.putData("Position4", new Positioning(m_arm,m_wrist,m_extension, Position4.armAngle, Position4.wristAngle, Position4.extensionDistance));
+    SmartDashboard.putData("Position5", new Positioning(m_arm,m_wrist,m_extension, Position5.armAngle, Position5.wristAngle, Position5.extensionDistance));
     SmartDashboard.putNumber("ArmTarget", 0);
     SmartDashboard.putNumber("Arm P", Constants.ArmPID.P);
     SmartDashboard.putNumber("Arm I", Constants.ArmPID.I);

@@ -6,7 +6,8 @@ import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Constants.*;
+import frc.robot.Constants.ValueConstants;
+import frc.robot.Constants.ArmPID;
 
 public class Arm extends SubsystemBase {
 
@@ -18,7 +19,7 @@ public class Arm extends SubsystemBase {
     private double kFF;
     public Arm() {
     try{
-        armMotorController = new CANSparkMax(DriveConstants.karmoter , CANSparkMax.MotorType.kBrushless);
+        armMotorController = new CANSparkMax(ValueConstants.karmoter , CANSparkMax.MotorType.kBrushless);
         armMotorController.restoreFactoryDefaults();
         armEncoder = armMotorController.getEncoder();
         armEncoder.setPositionConversionFactor(8);

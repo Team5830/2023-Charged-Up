@@ -21,13 +21,14 @@ package frc.robot;
  */
 public class Constants {
    
-     public static final class DriveConstants {
+     public static final class ValueConstants {
        public static final int kLeftMotor1Port = 2;
        public static final int kLeftMotor2Port = 4;
        public static final int kRightMotor1Port = 3;
        public static final int kRightMotor2Port = 5;
        public static final int karmoter = 1;
        public static final int kwristmoter = 6;
+       public static final int extemoroller = 7;
      }
     
 
@@ -41,12 +42,18 @@ public class Constants {
     }
 
     public static final class MovePID {
-        public static final double P = 1.0;
-        public static final double I = 0.0;
-        public static final double D = 0.0;
-        public static final double f = 0.0;
-        public static final double MaxAlignSpeed = 2; // Inches per second
-        public static final double AlignTolerance = 0.01; // Meters
+        public static final double lP = 1.0;
+        public static final double lI = 0.0;
+        public static final double lD = 0.0;
+        public static final double lf = 0.0;
+        public static final double lMaxAlignSpeed = 2; // Inches per second
+        public static final double lAlignTolerance = 0.01; // Meters
+        public static final double rP = 1.0;
+        public static final double rI = 0.0;
+        public static final double rD = 0.0;
+        public static final double rf = 0.0;
+        public static final double rMaxAlignSpeed = 2;
+        public static final double rAlignTolerance = 0.01;
     }
 
     public static final class ArmPID {
@@ -71,6 +78,42 @@ public class Constants {
         public static final float ForwardLimit = 200;
         public static final float ReverseLimit = 0;
         public static final double Tolerance = 2.0;
+    }
+    public static final class ExtendPID {
+        public static final double eP = .009;
+        public static final double eI = .000003;
+        public static final double eD = .03;
+        public static final double eFF =0;
+        public static final double eMaxOutput = .7;
+        public static final double eMinOutput = -.7;
+        public static final float eForwardLimit = 200;
+        public static final float eReverseLimit = 0;
+        public static final double eTolerance = 2.0;
+    }
+    public static final class Position1{ // Retracted
+        public static final double armAngle = 0.0;
+        public static final double wristAngle = 0.0;
+        public static final double extensionDistance = 0.0;
+    }
+    public static final class Position2{ // Pickup Position
+        public static final double armAngle = 60.0;
+        public static final double wristAngle = 120.0;
+        public static final double extensionDistance = 0.0;
+    }
+    public static final class Position3{ // Midlle Node
+        public static final double armAngle = 100.0;
+        public static final double wristAngle = 180.0;
+        public static final double extensionDistance = 0.0;
+    }
+    public static final class Position4{ // High node
+        public static final double armAngle = 120.0;
+        public static final double wristAngle = 200.0;
+        public static final double extensionDistance = .5;
+    }
+    public static final class Position5{ // Human player station pickup
+        public static final double armAngle = 120.0;
+        public static final double wristAngle = 200.0;
+        public static final double extensionDistance = 0.0;
     }
 }
 

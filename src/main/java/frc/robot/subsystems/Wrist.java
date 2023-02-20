@@ -19,7 +19,7 @@ public class Wrist extends SubsystemBase {
     private double kFF;
     public Wrist() {
     try{
-        wristMotorController = new CANSparkMax(DriveConstants.kwristmoter , CANSparkMax.MotorType.kBrushless);
+        wristMotorController = new CANSparkMax(ValueConstants.kwristmoter , CANSparkMax.MotorType.kBrushless);
         wristMotorController.restoreFactoryDefaults();
         wristEncoder = wristMotorController.getEncoder();
         wristEncoder.setPositionConversionFactor(80);
@@ -44,8 +44,7 @@ public class Wrist extends SubsystemBase {
         m_kwristmoterPID.setPositionPIDWrappingMaxInput(180);
         m_kwristmoterPID.setPositionPIDWrappingMinInput(-180);
         m_kwristmoterPID.setPositionPIDWrappingEnabled(true);
-        
-        
+                
         }catch (RuntimeException ex) {
             DriverStation.reportError("Error Configuring Drivetrain" + ex.getMessage(), true);
         }

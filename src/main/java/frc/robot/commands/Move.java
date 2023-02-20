@@ -23,7 +23,7 @@ public class Move extends PIDCommand {
    */
 
   public Move(double targetDistanceInches, DriveTrain drive) {
-    super(new PIDController(MovePID.P, MovePID.I, MovePID.D),
+    super(new PIDController(MovePID.lP, MovePID.lI, MovePID.lD),
         drive::getDistance, targetDistanceInches, output -> drive.TankDrive(output, output), drive);
 
     drive.resetEncoders();
@@ -32,7 +32,7 @@ public class Move extends PIDCommand {
     // stationary at the
     // setpoint before it is considered as having reached the reference
     getController()
-        .setTolerance(MovePID.AlignTolerance, MovePID.MaxAlignSpeed);
+        .setTolerance(MovePID.lAlignTolerance, MovePID.lMaxAlignSpeed);
   }
 
   @Override

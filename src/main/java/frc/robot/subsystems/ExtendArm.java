@@ -57,6 +57,9 @@ public class ExtendArm extends SubsystemBase{
     public double getPosition(){
         return extencoder.getPosition();
     }
+    public void Stop() {
+        extemoroller.stopMotor();
+    }
 
     @Override
     public void periodic(){
