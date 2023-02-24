@@ -60,6 +60,8 @@ public class DriveTrain extends SubsystemBase {
     private SparkMaxPIDController m_drivetrainPIDcontright;
     private double lP,lI,lD,rP,rI,rD;
     private double m_Value;
+    private double maxspeed;
+    private boolean extended;
     
     /**
     *
@@ -82,6 +84,8 @@ public class DriveTrain extends SubsystemBase {
       leftFollowEncoder = leftFollowMotorController.getEncoder();
       m_drivetrainPIDcontleft = leftLeadMotorController.getPIDController();
       m_drivetrainPIDcontright = rightLeadMotorController.getPIDController();
+      maxspeed = 1;
+      extended = false;
 
       leftFollowMotorController.follow(leftLeadMotorController);
 
@@ -130,17 +134,17 @@ public class DriveTrain extends SubsystemBase {
       if((rd != rD)) { m_drivetrainPIDcontright.setD(rd); rD = rd; }
     }
     public void TankDrive(double leftspeed, double rightspeed) {
-        if (leftspeed > 1.0) {
-          leftspeed = 1.0;
+        if (leftspeed > maxspeed) {
+          leftspeed = maxspeed;
         }
-        if (leftspeed < -1.0) {
-          leftspeed = -1.0;
+        if (leftspeed < -maxspeed) {
+          leftspeed = -maxspeed;
         }
-        if (rightspeed > 1.0) {
-          rightspeed = 1.0;
+        if (rightspeed > maxspeed) {
+          rightspeed = maxspeed;
         }
-        if (rightspeed < -1.0) {
-          rightspeed = -1.0;
+        if (rightspeed < -maxspeed) {
+          rightspeed = -maxspeed;
         }
         // System.out.println("%0.2f %0.2f",leftspeed,rightspeed);
         m_drive.tankDrive(-leftspeed, -rightspeed, true);
@@ -150,14 +154,23 @@ public class DriveTrain extends SubsystemBase {
         return ahrs.getPitch();
     }
 
+    public double getAngle() {
+      return ahrs.getAngle();
+    }
+
     public double getDistance() {
+      try{
         return (
             leftLeadEncoder.getPosition() +
             leftFollowEncoder.getPosition() +
             rightLeadEncoder.getPosition() +
             rightFollowEncoder.getPosition()
         ) / 4;
+      }catch(RuntimeException ex) {
+        DriverStation.reportError("Error Getting Position" + ex.getMessage(), true);
+        return 0;
       }
+    }
     
     public void resetEncoders() {
         leftLeadEncoder.setPosition(0);
@@ -169,9 +182,17 @@ public class DriveTrain extends SubsystemBase {
     @Override
     public void periodic() {
         SmartDashboard.putNumber("Pitch", getPitch());
+        SmartDashboard.putNumber("Angle", ahrs.getAngle());
         SmartDashboard.putNumber("Distance", getDistance());
         SmartDashboard.putNumber("rightposition", rightLeadEncoder.getPosition());
         SmartDashboard.putNumber("leftposition", leftLeadEncoder.getPosition());
+        SmartDashboard.getBoolean("Extended", extended);
+        if(extended = true){
+          maxspeed = 0.5;
+        }
+        else{
+          maxspeed = 1;
+        }
     }
     public void brake() {
      double rightarget = rightLeadEncoder.getPosition();

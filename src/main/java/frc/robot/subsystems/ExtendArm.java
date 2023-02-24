@@ -19,6 +19,7 @@ public class ExtendArm extends SubsystemBase{
     private SparkMaxPIDController extemPIDer;
     private double extensionTarget = 0;
     private double eP,eI,eD,eFF;
+    public boolean extended;
     
     public ExtendArm() {
         try{
@@ -40,6 +41,7 @@ public class ExtendArm extends SubsystemBase{
             extemoroller.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, ExtendPID.eForwardLimit);
             extemoroller.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, ExtendPID.eReverseLimit);
             extemoroller.setIdleMode(CANSparkMax.IdleMode.kBrake);
+            extended = false;
         }catch (RuntimeException ex){
             DriverStation.reportError("Error Configuring Extension Motor"+ex.getMessage(), true);
         }
@@ -65,5 +67,12 @@ public class ExtendArm extends SubsystemBase{
     public void periodic(){
         SmartDashboard.putNumber("Extension Position", extencoder.getPosition());
         SmartDashboard.getNumber("Extension Target", extensionTarget);
+        if (extencoder.getPosition()>0.5){
+            extended = true;
+          }
+          else{
+            extended = false;
+          }
+        SmartDashboard.putBoolean("Extended", extended);
     }
 }

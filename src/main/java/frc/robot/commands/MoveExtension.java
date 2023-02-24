@@ -25,7 +25,6 @@ public class MoveExtension extends CommandBase {
     @Override
     public void end(boolean interrupted) {
       m_extendarm.Stop();
-      
     }
     @Override
     public boolean isFinished() {
