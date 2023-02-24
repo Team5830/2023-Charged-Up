@@ -65,6 +65,14 @@ public class Wrist extends SubsystemBase {
         wristarget = degrees;
         m_kwristmoterPID.setReference(wristarget, ControlType.kPosition);    
     }
+    public void increment(){
+        wristarget = wristarget + 5;
+        m_kwristmoterPID.setReference(wristarget, ControlType.kPosition);
+    }
+    public void decrement(){
+        wristarget = wristarget - 5;
+        m_kwristmoterPID.setReference(wristarget, ControlType.kPosition);
+    }
     public boolean AtTarget(){
         double curposition = wristEncoder.getPosition();
         DriverStation.reportWarning(String.format("Position: %f",curposition),false);
