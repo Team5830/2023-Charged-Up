@@ -62,6 +62,14 @@ public class ExtendArm extends SubsystemBase{
     public void Stop() {
         extemoroller.stopMotor();
     }
+    public void increment(){
+        extensionTarget = extensionTarget + 0.1;
+        extemPIDer.setReference(extensionTarget, ControlType.kPosition);
+    }
+    public void decrement(){
+        extensionTarget = extensionTarget - 0.1;
+        extemPIDer.setReference(extensionTarget, ControlType.kPosition);
+    }
 
     @Override
     public void periodic(){

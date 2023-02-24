@@ -14,7 +14,7 @@ public class Arm extends SubsystemBase {
     private CANSparkMax armMotorController;
     private RelativeEncoder armEncoder;
     private SparkMaxPIDController m_karmoterPID;
-    private double armtarget;
+    private double karget;
     private double P,I,D;
     private double kFF;
     public Arm() {
@@ -62,17 +62,17 @@ public class Arm extends SubsystemBase {
     }
     
     public void move(double degrees) {
-        armtarget = degrees;
-        m_karmoterPID.setReference(armtarget, ControlType.kPosition);
+        karget = degrees;
+        m_karmoterPID.setReference(karget, ControlType.kPosition);
     }
     public boolean AtTarget(){
         double curposition = armEncoder.getPosition();
         DriverStation.reportWarning(String.format("Position: %f",curposition),false);
-        if ( Math.abs(curposition - armtarget) <=ArmPID.Tolerance){
+        if ( Math.abs(curposition - karget) <=ArmPID.Tolerance){
             DriverStation.reportWarning("True",false);
             return true;
         }else{
-            DriverStation.reportWarning(String.format("false: %f",Math.abs(curposition - armtarget)),false);
+            DriverStation.reportWarning(String.format("false: %f",Math.abs(curposition - karget)),false);
             return false;
         }
     }
@@ -85,10 +85,18 @@ public class Arm extends SubsystemBase {
         armMotorController.stopMotor();
         SmartDashboard.putNumber("ArmPosition", armEncoder.getPosition());
     }
+    public void increment(){
+        karget = karget + 2;
+        m_karmoterPID.setReference(karget, ControlType.kPosition);
+    }
+    public void decrement(){
+        karget = karget - 2;
+        m_karmoterPID.setReference(karget, ControlType.kPosition);
+    }
 
     @Override
     public void periodic(){
         SmartDashboard.putNumber("ArmPosition", armEncoder.getPosition());
-        SmartDashboard.getNumber("ArmTarget", armtarget );
+        SmartDashboard.getNumber("karget", karget );
     }
 }
