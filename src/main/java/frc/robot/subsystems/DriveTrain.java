@@ -178,7 +178,9 @@ public class DriveTrain extends SubsystemBase {
         rightLeadEncoder.setPosition(0);
         rightFollowEncoder.setPosition(0);
     }
-
+    public void OverrideMax(){
+      maxspeed=1;
+    }
     @Override
     public void periodic() {
         SmartDashboard.putNumber("Pitch", getPitch());
@@ -205,4 +207,36 @@ public class DriveTrain extends SubsystemBase {
        leftLeadMotorController.stopMotor();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
