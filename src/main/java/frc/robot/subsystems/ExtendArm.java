@@ -18,7 +18,7 @@ public class ExtendArm extends SubsystemBase{
     private RelativeEncoder extencoder;
     private SparkMaxPIDController extemPIDer;
     private double extensionTarget = 0;
-    private double eP,eI,eD,eFF;
+    private double P,I,D,FF;
     public boolean extended;
     
     public ExtendArm() {
@@ -27,19 +27,20 @@ public class ExtendArm extends SubsystemBase{
             extemoroller.restoreFactoryDefaults();
             extencoder = extemoroller.getEncoder();
             extemPIDer = extemoroller.getPIDController();
+            extencoder.setPositionConversionFactor(1);
             extencoder.setPosition(0.0);
-            extemPIDer.setP(ExtendPID.eP);
-            eP = ExtendPID.eP;
-            extemPIDer.setI(ExtendPID.eI);
-            eI = ExtendPID.eI;
-            extemPIDer.setD(ExtendPID.eD);
-            eD = ExtendPID.eD;
-            extemPIDer.setFF(ExtendPID.eFF);
-            eFF = ExtendPID.eFF;
+            extemPIDer.setP(ExtendPID.P);
+            P = ExtendPID.P;
+            extemPIDer.setI(ExtendPID.I);
+            I = ExtendPID.I;
+            extemPIDer.setD(ExtendPID.D);
+            D = ExtendPID.D;
+            extemPIDer.setFF(ExtendPID.FF);
+            FF = ExtendPID.FF;
             extemoroller.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
             extemoroller.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);    
-            extemoroller.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, ExtendPID.eForwardLimit);
-            extemoroller.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, ExtendPID.eReverseLimit);
+            extemoroller.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, ExtendPID.ForwardLimit);
+            extemoroller.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, ExtendPID.ReverseLimit);
             extemoroller.setIdleMode(CANSparkMax.IdleMode.kBrake);
             extended = false;
         }catch (RuntimeException ex){
@@ -48,7 +49,16 @@ public class ExtendArm extends SubsystemBase{
     }
 
     public void updatePID(){
-
+        double p = SmartDashboard.getNumber("Extend P", ExtendPID.P);
+        double i = SmartDashboard.getNumber("Extend I", ExtendPID.I);
+        double d = SmartDashboard.getNumber("Extend D", ExtendPID.D);
+        double ff = SmartDashboard.getNumber("Extend FF", ExtendPID.FF);
+        // if PID coefficients on SmartDashboard have changed, write new values to controller
+        if((p != P)) { extemPIDer.setP(p); P = p;  }
+        if((i != I)) { extemPIDer.setI(i); I = i; }
+        if((d != D)) { extemPIDer.setD(d); D = d; }
+        if((ff != FF)) { extemPIDer.setFF(ff); FF = ff; }  
+        DriverStation.reportWarning("Updated PID", false);
     }
 
     public void move(double distance){

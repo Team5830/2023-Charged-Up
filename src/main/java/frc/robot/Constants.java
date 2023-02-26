@@ -80,15 +80,15 @@ public class Constants {
         public static final double Tolerance = 2.0;
     }
     public static final class ExtendPID {
-        public static final double eP = .009;
-        public static final double eI = .000003;
-        public static final double eD = .03;
-        public static final double eFF =0;
-        public static final double eMaxOutput = .7;
-        public static final double eMinOutput = -.7;
-        public static final float eForwardLimit = 200;
-        public static final float eReverseLimit = 0;
-        public static final double eTolerance = 2.0;
+        public static final double P = .009;
+        public static final double I = .000003;
+        public static final double D = .03;
+        public static final double FF =0;
+        public static final double MaxOutput = .7;
+        public static final double MinOutput = -.7;
+        public static final float ForwardLimit = 200;
+        public static final float ReverseLimit = 0;
+        public static final double Tolerance = 2.0;
     }
     public static final class Position1{ // Retracted
         public static final double armAngle = 0.0;
