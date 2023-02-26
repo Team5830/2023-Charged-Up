@@ -21,7 +21,9 @@ public class MoveArmDash extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    arm.updatePID();
     double target = SmartDashboard.getNumber("ArmTarget", arm.Position());
+
     DriverStation.reportWarning(String.format("Target %f",target),false);
     arm.move(target);
   }

@@ -81,9 +81,8 @@ public class DriveTrain extends SubsystemBase {
       leftLeadEncoder.setPositionConversionFactor(18.84*2.54/8.33);
       leftFollowMotorController = new CANSparkMax(ValueConstants.kLeftMotor2Port, CANSparkMax.MotorType.kBrushless);
       leftFollowMotorController.restoreFactoryDefaults();
-      leftFollowEncoder = leftFollowMotorController.getEncoder();
+      //leftFollowEncoder = leftFollowMotorController.getEncoder();
       m_drivetrainPIDcontleft = leftLeadMotorController.getPIDController();
-      m_drivetrainPIDcontright = rightLeadMotorController.getPIDController();
       maxspeed = 1;
       extended = false;
 
@@ -91,22 +90,26 @@ public class DriveTrain extends SubsystemBase {
 
       leftMotorControllerGroup = new MotorControllerGroup(leftLeadMotorController, leftFollowMotorController);
       addChild("Left Motor Controller Group", leftMotorControllerGroup);
-      //leftMotorControllerGroup.setInverted(true);
-
+      
 
       rightLeadMotorController = new CANSparkMax(ValueConstants.kRightMotor1Port, CANSparkMax.MotorType.kBrushless);
       rightLeadMotorController.restoreFactoryDefaults();
       rightLeadEncoder = rightLeadMotorController.getEncoder();
       rightLeadEncoder.setPositionConversionFactor(18.84*2.54/8.33);
+      
+      m_drivetrainPIDcontright = rightLeadMotorController.getPIDController();
       rightFollowMotorController = new CANSparkMax(ValueConstants.kRightMotor2Port, CANSparkMax.MotorType.kBrushless);
       rightFollowMotorController.restoreFactoryDefaults();
-      rightFollowEncoder = rightFollowMotorController.getEncoder();
+      //rightFollowEncoder = rightFollowMotorController.getEncoder();
 
 
       rightFollowMotorController.follow(rightLeadMotorController);
 
       rightMotorControllerGroup = new MotorControllerGroup(rightLeadMotorController, rightFollowMotorController);
       rightMotorControllerGroup.setInverted(true);
+      rightLeadEncoder.setPosition(0);
+      leftLeadEncoder.setPosition(0);
+    
       m_drive = new DifferentialDrive(leftMotorControllerGroup, rightMotorControllerGroup);
       m_drivetrainPIDcontleft.setP(MovePID.lP);
       m_drivetrainPIDcontleft.setI(MovePID.lI);
@@ -161,11 +164,9 @@ public class DriveTrain extends SubsystemBase {
     public double getDistance() {
       try{
         return (
-            leftLeadEncoder.getPosition() +
-            leftFollowEncoder.getPosition() +
-            rightLeadEncoder.getPosition() +
-            rightFollowEncoder.getPosition()
-        ) / 4;
+            leftLeadEncoder.getPosition() -
+            rightLeadEncoder.getPosition()
+        ) / 2;
       }catch(RuntimeException ex) {
         DriverStation.reportError("Error Getting Position" + ex.getMessage(), true);
         return 0;
@@ -174,9 +175,7 @@ public class DriveTrain extends SubsystemBase {
     
     public void resetEncoders() {
         leftLeadEncoder.setPosition(0);
-        leftFollowEncoder.setPosition(0);
         rightLeadEncoder.setPosition(0);
-        rightFollowEncoder.setPosition(0);
     }
     public void OverrideMax(){
       maxspeed=1;

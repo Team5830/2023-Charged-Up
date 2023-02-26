@@ -6,20 +6,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MoveExtensionDash extends CommandBase {
     private ExtendArm m_extendarm;
-    public MoveExtensionDash (ExtendArm extendarm, double position) {
+    public MoveExtensionDash (ExtendArm extendarm) {
         m_extendarm = extendarm;
         addRequirements(extendarm);
     }
     @Override
     public void initialize() {
-      double target = SmartDashboard.getNumber("ExtendArm Target", m_extendarm.getPosition());
+      double target = SmartDashboard.getNumber("Extension Target", m_extendarm.getPosition());
+      m_extendarm.updatePID();
       DriverStation.reportWarning(String.format("Target %f",target),false);
       m_extendarm.move(target);
     }
 
     @Override
     public void execute() {
-      double target = SmartDashboard.getNumber("ExtendArm Target", m_extendarm.getPosition());
+      double target = SmartDashboard.getNumber("Extension Target", m_extendarm.getPosition());
       m_extendarm.move(target);
     }
 

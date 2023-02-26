@@ -63,7 +63,7 @@ public class Constants {
         public static final double FF = 0;
         public static final double MaxOutput = .4;
         public static final double MinOutput = -.4;
-        public static final float ForwardLimit = 90;
+        public static final float ForwardLimit = 300;
         public static final float ReverseLimit = 0;
         public static final double Tolerance = 2.0;
     }
@@ -75,7 +75,7 @@ public class Constants {
         public static final double FF = 0;
         public static final double MaxOutput = .7;
         public static final double MinOutput = -.7;
-        public static final float ForwardLimit = 200;
+        public static final float ForwardLimit = 220;
         public static final float ReverseLimit = 0;
         public static final double Tolerance = 2.0;
     }
@@ -86,8 +86,8 @@ public class Constants {
         public static final double FF =0;
         public static final double MaxOutput = .7;
         public static final double MinOutput = -.7;
-        public static final float ForwardLimit = 200;
-        public static final float ReverseLimit = 0;
+        public static final float ForwardLimit = 0;
+        public static final float ReverseLimit = -35;
         public static final double Tolerance = 2.0;
     }
     public static final class Position1{ // Retracted
