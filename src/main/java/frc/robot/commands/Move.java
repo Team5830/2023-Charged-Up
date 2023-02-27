@@ -4,7 +4,6 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.Constants.MovePID;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.Constants.MovePID;
 
 /**
  * A command that will turn the robot to the specified angle.
@@ -14,18 +13,18 @@ public class Move extends PIDCommand {
   /**
    * Moves robot to the distance measured on the LIDAR
    *
-   * @param targetDistanceInches The Target distance for the LIDAR
+   * @param targetDistanceMeters The Target distance in Meters
    * @param drive                The drive subsystem to use
-   * @param lidar                The LIDAR subsystem to use
    * @param kMoveP               Proportional feedback parameter
    * @param kMoveI               Integral feedback parameter
    * @param kMoveD               Derivative feedback parameter
    */
 
-  public Move(double targetDistanceInches, DriveTrain drive) {
+  public Move(double targetDistanceMeters, DriveTrain drive) {
     super(new PIDController(MovePID.lP, MovePID.lI, MovePID.lD),
-        drive::getDistance, targetDistanceInches, output -> drive.TankDrive(output, output), drive);
+        drive::getDistance, targetDistanceMeters, output -> drive.TankDrive(output, output), drive);
 
+    drive.updatePID();
     drive.resetEncoders();
 
     // Set the controller tolerance - the delta tolerance ensures the robot is

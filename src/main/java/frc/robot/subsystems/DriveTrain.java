@@ -53,13 +53,10 @@ public class DriveTrain extends SubsystemBase {
     private MotorControllerGroup leftMotorControllerGroup;
     private MotorControllerGroup rightMotorControllerGroup;
     private RelativeEncoder leftLeadEncoder;
-    private RelativeEncoder leftFollowEncoder;
     private RelativeEncoder rightLeadEncoder;
-    private RelativeEncoder rightFollowEncoder;
     private SparkMaxPIDController m_drivetrainPIDcontleft;
     private SparkMaxPIDController m_drivetrainPIDcontright;
     private double lP,lI,lD,rP,rI,rD;
-    private double m_Value;
     private double maxspeed;
     private boolean extended;
     
@@ -81,7 +78,7 @@ public class DriveTrain extends SubsystemBase {
       leftLeadEncoder.setPositionConversionFactor(18.84*2.54/8.33);
       leftFollowMotorController = new CANSparkMax(ValueConstants.kLeftMotor2Port, CANSparkMax.MotorType.kBrushless);
       leftFollowMotorController.restoreFactoryDefaults();
-      //leftFollowEncoder = leftFollowMotorController.getEncoder();
+    
       m_drivetrainPIDcontleft = leftLeadMotorController.getPIDController();
       maxspeed = 1;
       extended = false;
@@ -95,16 +92,13 @@ public class DriveTrain extends SubsystemBase {
       rightLeadMotorController = new CANSparkMax(ValueConstants.kRightMotor1Port, CANSparkMax.MotorType.kBrushless);
       rightLeadMotorController.restoreFactoryDefaults();
       rightLeadEncoder = rightLeadMotorController.getEncoder();
-      rightLeadEncoder.setPositionConversionFactor(18.84*2.54/8.33);
+      rightLeadEncoder.setPositionConversionFactor(-18.84*2.54/8.33); //
       
       m_drivetrainPIDcontright = rightLeadMotorController.getPIDController();
       rightFollowMotorController = new CANSparkMax(ValueConstants.kRightMotor2Port, CANSparkMax.MotorType.kBrushless);
       rightFollowMotorController.restoreFactoryDefaults();
-      //rightFollowEncoder = rightFollowMotorController.getEncoder();
-
-
+    
       rightFollowMotorController.follow(rightLeadMotorController);
-
       rightMotorControllerGroup = new MotorControllerGroup(rightLeadMotorController, rightFollowMotorController);
       rightMotorControllerGroup.setInverted(true);
       rightLeadEncoder.setPosition(0);
@@ -161,10 +155,14 @@ public class DriveTrain extends SubsystemBase {
       return ahrs.getAngle();
     }
 
+    public void resetHeading(){
+      ahrs.reset();
+    }
+
     public double getDistance() {
       try{
         return (
-            leftLeadEncoder.getPosition() -
+            leftLeadEncoder.getPosition() +
             rightLeadEncoder.getPosition()
         ) / 2;
       }catch(RuntimeException ex) {

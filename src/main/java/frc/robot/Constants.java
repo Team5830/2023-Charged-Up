@@ -41,6 +41,16 @@ public class Constants {
         public static final double Level = 1;
     }
 
+    public static final class TurnPID {
+        public static final double P = 0.08;
+        public static final double I = 0.0;
+        public static final double D = 0.0;
+        public static final double f = 0.0;
+        public static final double Tolerance = 2.0; // Measured in degrees
+        public static final double TurnRateTolerance = 10; //Degrees per second
+    }
+
+
     public static final class MovePID {
         public static final double lP = 1.0;
         public static final double lI = 0.0;
@@ -57,10 +67,10 @@ public class Constants {
     }
 
     public static final class ArmPID {
-        public static final double P = .009;
-        public static final double I = 000003;
-        public static final double D = 03;
-        public static final double FF = 0;
+        public static final double P = 0.0009;
+        public static final double I = 0.0;
+        public static final double D = 0.0;
+        public static final double FF = 0.0;
         public static final double MaxOutput = .4;
         public static final double MinOutput = -.4;
         public static final float ForwardLimit = 300;
@@ -69,9 +79,9 @@ public class Constants {
     }
 
     public static final class WristPID {
-        public static final double P = .009;
-        public static final double I = .000003;
-        public static final double D = .03;
+        public static final double P = 0.0009; //.009;
+        public static final double I = 0.0;    //.000003; 
+        public static final double D = 0.0;    //.03;
         public static final double FF = 0;
         public static final double MaxOutput = .7;
         public static final double MinOutput = -.7;
@@ -80,14 +90,14 @@ public class Constants {
         public static final double Tolerance = 2.0;
     }
     public static final class ExtendPID {
-        public static final double P = .009;
-        public static final double I = .000003;
-        public static final double D = .03;
-        public static final double FF =0;
+        public static final double P = 0.0009;
+        public static final double I = 0.0;
+        public static final double D = 0.0;
+        public static final double FF =0.0;
         public static final double MaxOutput = .7;
         public static final double MinOutput = -.7;
-        public static final float ForwardLimit = 0;
-        public static final float ReverseLimit = -35;
+        public static final float ForwardLimit = 35;
+        public static final float ReverseLimit = 0;
         public static final double Tolerance = 2.0;
     }
     public static final class Position1{ // Retracted

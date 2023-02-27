@@ -1,14 +1,11 @@
 package frc.robot.subsystems;
 
-import java.util.concurrent.CancellationException;
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.*;
@@ -27,8 +24,7 @@ public class ExtendArm extends SubsystemBase{
             extemoroller.restoreFactoryDefaults();
             extencoder = extemoroller.getEncoder();
             extemPIDer = extemoroller.getPIDController();
-            extencoder.setPositionConversionFactor(1.62);
-            extencoder.setInverted(true);
+            extencoder.setPositionConversionFactor(-1.62);
             extencoder.setPosition(0.0);
             extemPIDer.setP(ExtendPID.P);
             P = ExtendPID.P;

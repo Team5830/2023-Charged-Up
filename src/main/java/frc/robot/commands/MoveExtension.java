@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class MoveExtension extends CommandBase {
     private ExtendArm m_extendarm;
     private double position;
-    public MoveExtension (ExtendArm extendarm, double positin) {
+    public MoveExtension (double positin, ExtendArm extendarm) {
         m_extendarm = extendarm;
         addRequirements(extendarm);
         position =positin;

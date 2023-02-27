@@ -39,9 +39,9 @@ public class Arm extends SubsystemBase {
         m_karmoterPID.setFF(ArmPID.FF);
         kFF = ArmPID.FF;
         m_karmoterPID.setOutputRange(ArmPID.MinOutput, ArmPID.MaxOutput);
-        m_karmoterPID.setPositionPIDWrappingMaxInput(180);
-        m_karmoterPID.setPositionPIDWrappingMinInput(-180);
-        m_karmoterPID.setPositionPIDWrappingEnabled(true);
+        //m_karmoterPID.setPositionPIDWrappingMaxInput(180);
+        //m_karmoterPID.setPositionPIDWrappingMinInput(-180);
+        //m_karmoterPID.setPositionPIDWrappingEnabled(true);
         
         
         }catch (RuntimeException ex) {
