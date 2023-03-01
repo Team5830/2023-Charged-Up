@@ -141,21 +141,23 @@ private final CommandGenericHID xroller = new CommandGenericHID(3);
       Trigger button4 = xroller.button(4);
       Trigger button5 = xroller.button(5);
       Trigger button6 = xroller.button(6);
+      Trigger button7 = xroller.button(7);
+      Trigger button8 = xroller.button(8);
       //Driver right Joystick max override
       Trigger Driverbutton5 = new JoystickButton(rightJoystick, 5);
 
-      button2.onTrue(new Positioning(m_arm,m_wrist,m_extension, Position1.armAngle, Position1.wristAngle, Position1.extensionDistance));
+      button3.onTrue(new Positioning(m_arm,m_wrist,m_extension, Position1.armAngle, Position1.wristAngle, Position1.extensionDistance));
       button4.onTrue(new Positioning(m_arm,m_wrist,m_extension, Position2.armAngle, Position2.wristAngle, Position2.extensionDistance));
-      button3.onTrue(new Positioning(m_arm,m_wrist,m_extension, Position3.armAngle, Position3.wristAngle, Position3.extensionDistance));
-      button1.onTrue(new Positioning(m_arm,m_wrist,m_extension, Position4.armAngle, Position4.wristAngle, Position4.extensionDistance));
+      button1.onTrue(new Positioning(m_arm,m_wrist,m_extension, Position3.armAngle, Position3.wristAngle, Position3.extensionDistance));
+      button2.onTrue(new Positioning(m_arm,m_wrist,m_extension, Position4.armAngle, Position4.wristAngle, Position4.extensionDistance));
       button5.onTrue(new Positioning(m_arm,m_wrist,m_extension, Position5.armAngle, Position5.wristAngle, Position5.extensionDistance));
       button6.whileTrue(new InstantCommand( m_wrist::increment));
-      xroller.axisGreaterThan(3, 0.2).whileTrue(  new InstantCommand( m_wrist::decrement));
+      button7.onTrue(new ConditionalCommand(new CloseManipulator(m_pneumatics), new OpenManipulator(m_pneumatics), m_pneumatics::manipulator_open));
+      button8.whileTrue(new InstantCommand( m_wrist::decrement));
       xroller.povRight().and(button6).whileTrue(new InstantCommand( m_extension::increment));
-      xroller.povRight().and(xroller.axisGreaterThan(3, .2)).whileTrue(new InstantCommand( m_extension::decrement));
+      xroller.povRight().and(button8).whileTrue(new InstantCommand( m_extension::decrement));
       xroller.povLeft().and(button6).whileTrue(new InstantCommand( m_arm::increment));
-      xroller.povLeft().and(xroller.axisGreaterThan(3, .2)).whileTrue(new InstantCommand( m_arm::decrement));
-      xroller.axisGreaterThan(2, 0.2).onTrue(new ConditionalCommand(new CloseManipulator(m_pneumatics), new OpenManipulator(m_pneumatics), m_pneumatics::manipulator_open));
+      xroller.povLeft().and(button8).whileTrue(new InstantCommand( m_arm::decrement));
       //xroller.axisGreaterThan(2, .2).onTrue(new toggleManipulator( m_pneumatics ));
 
       Driverbutton5.onTrue(new InstantCommand(m_driveTrain::OverrideMax));
