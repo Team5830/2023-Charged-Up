@@ -24,7 +24,7 @@ public class ExtendArm extends SubsystemBase{
             extemoroller.restoreFactoryDefaults();
             extencoder = extemoroller.getEncoder();
             extemPIDer = extemoroller.getPIDController();
-            extencoder.setPositionConversionFactor(-1.62);
+            extencoder.setPositionConversionFactor(1.62);
             extencoder.setPosition(0.0);
             extemPIDer.setP(ExtendPID.P);
             P = ExtendPID.P;

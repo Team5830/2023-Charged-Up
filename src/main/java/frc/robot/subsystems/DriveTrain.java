@@ -92,7 +92,7 @@ public class DriveTrain extends SubsystemBase {
       rightLeadMotorController = new CANSparkMax(ValueConstants.kRightMotor1Port, CANSparkMax.MotorType.kBrushless);
       rightLeadMotorController.restoreFactoryDefaults();
       rightLeadEncoder = rightLeadMotorController.getEncoder();
-      rightLeadEncoder.setPositionConversionFactor(-18.84*2.54/8.33); //
+      rightLeadEncoder.setPositionConversionFactor(18.84*2.54/8.33); //
       
       m_drivetrainPIDcontright = rightLeadMotorController.getPIDController();
       rightFollowMotorController = new CANSparkMax(ValueConstants.kRightMotor2Port, CANSparkMax.MotorType.kBrushless);

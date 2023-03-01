@@ -17,7 +17,7 @@ public class Positioning extends SequentialCommandGroup {
         if (m_extend.getPosition()>0.1){
             addCommands(new MoveExtension(extensiondistance, extendarm));
         }
-        DriverStation.reportWarning(String.format("Arm: %0.2f Wrist: %0.2f Extension: %0.2f",armangle,wristangle,extensiondistance),false);
+        //DriverStation.reportWarning(String.format("Arm: %0.2d Wrist: %0.2d Extension: %0.2d",armangle,wristangle,extensiondistance),false);
         addCommands(
             new MoveArm(armangle, m_arm),
             new MoveWrist(wristangle, m_wrist),

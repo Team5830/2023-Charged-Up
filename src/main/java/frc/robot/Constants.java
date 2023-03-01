@@ -96,8 +96,8 @@ public class Constants {
         public static final double FF =0.0;
         public static final double MaxOutput = .7;
         public static final double MinOutput = -.7;
-        public static final float ForwardLimit = 35;
-        public static final float ReverseLimit = 0;
+        public static final float ForwardLimit = 0;
+        public static final float ReverseLimit = -35;
         public static final double Tolerance = 2.0;
     }
     public static final class Position1{ // Retracted
