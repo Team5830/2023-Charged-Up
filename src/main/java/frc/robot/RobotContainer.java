@@ -83,6 +83,7 @@ private final CommandGenericHID xroller = new CommandGenericHID(3);
     SmartDashboard.putData("Position3", new Positioning(m_arm,m_wrist,m_extension, Position3.armAngle, Position3.wristAngle, Position3.extensionDistance));
     SmartDashboard.putData("Position4", new Positioning(m_arm,m_wrist,m_extension, Position4.armAngle, Position4.wristAngle, Position4.extensionDistance));
     SmartDashboard.putData("Position5", new Positioning(m_arm,m_wrist,m_extension, Position5.armAngle, Position5.wristAngle, Position5.extensionDistance));
+    SmartDashboard.putData("Move", new Move(2.0, m_driveTrain) );
     SmartDashboard.putNumber("ArmTarget", 0);
     SmartDashboard.putNumber("Arm P", Constants.ArmPID.P);
     SmartDashboard.putNumber("Arm I", Constants.ArmPID.I);
