@@ -92,7 +92,7 @@ public class DriveTrain extends SubsystemBase {
       rightLeadMotorController = new CANSparkMax(ValueConstants.kRightMotor1Port, CANSparkMax.MotorType.kBrushless);
       rightLeadMotorController.restoreFactoryDefaults();
       rightLeadEncoder = rightLeadMotorController.getEncoder();
-      rightLeadEncoder.setPositionConversionFactor(18.84*2.54/8.33); //
+      rightLeadEncoder.setPositionConversionFactor(18.84*2.54/8.33);
       
       m_drivetrainPIDcontright = rightLeadMotorController.getPIDController();
       rightFollowMotorController = new CANSparkMax(ValueConstants.kRightMotor2Port, CANSparkMax.MotorType.kBrushless);
@@ -162,7 +162,7 @@ public class DriveTrain extends SubsystemBase {
     public double getDistance() {
       try{
         return (
-            leftLeadEncoder.getPosition() +
+            leftLeadEncoder.getPosition() -
             rightLeadEncoder.getPosition()
         ) / 2;
       }catch(RuntimeException ex) {
@@ -183,7 +183,7 @@ public class DriveTrain extends SubsystemBase {
         SmartDashboard.putNumber("Pitch", getPitch());
         SmartDashboard.putNumber("Angle", ahrs.getAngle());
         SmartDashboard.putNumber("Distance", getDistance());
-        SmartDashboard.putNumber("rightposition", rightLeadEncoder.getPosition());
+        SmartDashboard.putNumber("rightposition", -rightLeadEncoder.getPosition());
         SmartDashboard.putNumber("leftposition", leftLeadEncoder.getPosition());
         SmartDashboard.getBoolean("Extended", extended);
         if(extended = true){
@@ -194,7 +194,7 @@ public class DriveTrain extends SubsystemBase {
         }
     }
     public void brake() {
-     double rightarget = rightLeadEncoder.getPosition();
+     double rightarget = -rightLeadEncoder.getPosition();
      double leftarget = leftLeadEncoder.getPosition();
      m_drivetrainPIDcontleft.setReference(leftarget, ControlType.kPosition);
      m_drivetrainPIDcontright.setReference(rightarget, ControlType.kPosition);

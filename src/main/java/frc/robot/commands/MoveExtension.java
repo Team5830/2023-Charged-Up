@@ -14,6 +14,7 @@ public class MoveExtension extends CommandBase {
     }
     @Override
     public void initialize() {
+      m_extendarm.updatePID();
       m_extendarm.move(position);
     }
 

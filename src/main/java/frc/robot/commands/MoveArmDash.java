@@ -41,7 +41,7 @@ public class MoveArmDash extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     // Called once the command ends or is interrupted.
-    arm.Stop();
+    //arm.Stop();
     
   }
   // Returns true when the command should end.
