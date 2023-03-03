@@ -59,7 +59,7 @@ public class ExtendArm extends SubsystemBase{
     }
 
     public void move(double distance){
-        extensionTarget = distance;
+        extensionTarget = -distance;
         extemPIDer.setReference(extensionTarget, ControlType.kPosition);
     }
 
@@ -80,9 +80,9 @@ public class ExtendArm extends SubsystemBase{
 
     @Override
     public void periodic(){
-        SmartDashboard.putNumber("Extension Position", extencoder.getPosition());
+        SmartDashboard.putNumber("Extension Position", -extencoder.getPosition());
         SmartDashboard.getNumber("Extension Target", extensionTarget);
-        if (extencoder.getPosition()>0.5){
+        if (-extencoder.getPosition()>0.5){
             extended = true;
           }
           else{

@@ -12,7 +12,7 @@ public class MoveExtensionDash extends CommandBase {
     }
     @Override
     public void initialize() {
-      double target = SmartDashboard.getNumber("Extension Target", m_extendarm.getPosition());
+      double target = SmartDashboard.getNumber("Extension Target", -m_extendarm.getPosition());
       m_extendarm.updatePID();
       DriverStation.reportWarning(String.format("Target %f",target),false);
       m_extendarm.move(target);
@@ -20,13 +20,13 @@ public class MoveExtensionDash extends CommandBase {
 
     @Override
     public void execute() {
-      double target = SmartDashboard.getNumber("Extension Target", m_extendarm.getPosition());
+      double target = SmartDashboard.getNumber("Extension Target", -m_extendarm.getPosition());
       m_extendarm.move(target);
     }
 
     @Override
     public void end(boolean interrupted) {
-      m_extendarm.Stop();
+      //m_extendarm.Stop();
       
     }
     @Override

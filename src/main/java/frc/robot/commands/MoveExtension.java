@@ -1,8 +1,6 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.*;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MoveExtension extends CommandBase {
     private ExtendArm m_extendarm;
@@ -25,7 +23,7 @@ public class MoveExtension extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-      m_extendarm.Stop();
+      //m_extendarm.Stop();
     }
     @Override
     public boolean isFinished() {
