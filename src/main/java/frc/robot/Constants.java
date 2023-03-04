@@ -121,9 +121,9 @@ public class Constants {
         public static final double extensionDistance = -23.0;
     }
     public static final class Position5{ // Human player station pickup
-        public static final double armAngle = 100.0;
-        public static final double wristAngle = 200.0;
-        public static final double extensionDistance = 0.0;
+        public static final double armAngle = 176.4;
+        public static final double wristAngle = 162.0;
+        public static final double extensionDistance = 1.0;
     }
 }
 
