@@ -15,18 +15,19 @@ public class MoveExtension extends CommandBase {
       m_extendarm.updatePID();
       m_extendarm.move(position);
     }
-
+    /* 
     @Override
     public void execute() {
       m_extendarm.move(position);
     }
-
+    */
     @Override
     public void end(boolean interrupted) {
       //m_extendarm.Stop();
     }
     @Override
     public boolean isFinished() {
-      return false;
+      //return false;
+      return m_extendarm.AtTarget();
     }
 }

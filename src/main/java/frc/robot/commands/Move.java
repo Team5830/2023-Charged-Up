@@ -24,7 +24,7 @@ public class Move extends PIDCommand {
     super(new PIDController(MovePID.lP, MovePID.lI, MovePID.lD),
         drive::getDistance, targetDistanceMeters, output -> drive.TankDrive(output, output), drive);
 
-    drive.updatePID();
+    //drive.updatePID();
     drive.resetEncoders();
 
     // Set the controller tolerance - the delta tolerance ensures the robot is

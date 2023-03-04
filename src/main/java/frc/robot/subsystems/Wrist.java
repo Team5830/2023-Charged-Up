@@ -41,6 +41,7 @@ public class Wrist extends SubsystemBase {
         m_kwristmoterPID.setFF(WristPID.FF);
         kFF = WristPID.FF;
         m_kwristmoterPID.setOutputRange(WristPID.MinOutput, WristPID.MaxOutput);
+        move(0);
         //m_kwristmoterPID.setPositionPIDWrappingMaxInput(180);
         //m_kwristmoterPID.setPositionPIDWrappingMinInput(-180);
         //m_kwristmoterPID.setPositionPIDWrappingEnabled(true);

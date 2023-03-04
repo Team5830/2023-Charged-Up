@@ -40,6 +40,7 @@ public class ExtendArm extends SubsystemBase{
             extemoroller.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, ExtendPID.ReverseLimit);
             extemoroller.setIdleMode(CANSparkMax.IdleMode.kBrake);
             extended = false;
+            move(0);
         }catch (RuntimeException ex){
             DriverStation.reportError("Error Configuring Extension Motor"+ex.getMessage(), true);
         }
@@ -69,12 +70,23 @@ public class ExtendArm extends SubsystemBase{
     public void Stop() {
         extemoroller.stopMotor();
     }
+    public boolean AtTarget(){
+        double curposition = extencoder.getPosition();
+        DriverStation.reportWarning(String.format("Position: %f",curposition),false);
+        if ( Math.abs(curposition - extensionTarget) <=ExtendPID.Tolerance){
+            DriverStation.reportWarning("True",false);
+            return true;
+        }else{
+            DriverStation.reportWarning(String.format("false: %f",Math.abs(curposition - extensionTarget)),false);
+            return false;
+        }
+    }
     public void increment(){
-        extensionTarget = extensionTarget + 2.0;
+        extensionTarget = extensionTarget + 4.0;
         extemPIDer.setReference(extensionTarget, ControlType.kPosition);
     }
     public void decrement(){
-        extensionTarget = extensionTarget - 2.0;
+        extensionTarget = extensionTarget - 4.0;
         extemPIDer.setReference(extensionTarget, ControlType.kPosition);
     }
 

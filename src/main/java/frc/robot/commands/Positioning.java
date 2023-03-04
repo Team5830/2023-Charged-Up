@@ -17,7 +17,16 @@ public class Positioning extends SequentialCommandGroup {
         this.m_wrist = wrist;
         this.m_extend = extendarm;
         addRequirements(arm, wrist, extendarm);
-        if (m_extend.extended == true){
+        addCommands(
+            new MoveExtension(0, extendarm),
+            Commands.parallel(
+                new MoveArm(armangle, m_arm),
+                new MoveWrist(wristangle, m_wrist)
+            ),
+            new MoveExtension(extensiondistance, extendarm)
+        );
+        /* 
+        if (m_extend.extended){
             addCommands(
                 new ScheduleCommand( new MoveExtension(extensiondistance, extendarm)).andThen(Commands.waitSeconds(2)),
                 Commands.parallel(
@@ -34,8 +43,8 @@ public class Positioning extends SequentialCommandGroup {
                     new MoveExtension(extensiondistance, extendarm)
                 );
         }
-        System.out.print(String.format("Target Arm: %.2f Extension: %.2f Wrist: %.2f \n",armangle,extensiondistance, wristangle));
+        //System.out.print(String.format("Target Arm: %.2f Extension: %.2f Wrist: %.2f \n",armangle,extensiondistance, wristangle));
         
-    
+        */
     }
 }
