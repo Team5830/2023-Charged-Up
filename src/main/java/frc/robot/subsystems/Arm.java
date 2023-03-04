@@ -86,11 +86,11 @@ public class Arm extends SubsystemBase {
         SmartDashboard.putNumber("ArmPosition", armEncoder.getPosition());
     }
     public void increment(){
-        karget = karget + 2;
+        karget = karget + 5;
         m_karmoterPID.setReference(karget, ControlType.kPosition);
     }
     public void decrement(){
-        karget = karget - 2;
+        karget = karget - 5;
         m_karmoterPID.setReference(karget, ControlType.kPosition);
     }
 

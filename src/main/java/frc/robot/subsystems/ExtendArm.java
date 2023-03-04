@@ -64,25 +64,25 @@ public class ExtendArm extends SubsystemBase{
     }
 
     public double getPosition(){
-        return extencoder.getPosition();
+        return -extencoder.getPosition();
     }
     public void Stop() {
         extemoroller.stopMotor();
     }
     public void increment(){
-        extensionTarget = extensionTarget + 0.1;
+        extensionTarget = extensionTarget + 2.0;
         extemPIDer.setReference(extensionTarget, ControlType.kPosition);
     }
     public void decrement(){
-        extensionTarget = extensionTarget - 0.1;
+        extensionTarget = extensionTarget - 2.0;
         extemPIDer.setReference(extensionTarget, ControlType.kPosition);
     }
 
     @Override
     public void periodic(){
-        SmartDashboard.putNumber("Extension Position", -extencoder.getPosition());
+        SmartDashboard.putNumber("Extension Position", getPosition());
         SmartDashboard.getNumber("Extension Target", extensionTarget);
-        if (-extencoder.getPosition()>0.5){
+        if (getPosition()>10.0){
             extended = true;
           }
           else{

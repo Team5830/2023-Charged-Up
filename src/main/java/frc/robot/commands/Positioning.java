@@ -1,7 +1,10 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.DriverStation;
+//import edu.wpi.first.wpilibj.DriverStation; Ha Ha Ha, Good Bye Sucker!
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 import frc.robot.subsystems.*;
 
 public class Positioning extends SequentialCommandGroup {
@@ -14,15 +17,25 @@ public class Positioning extends SequentialCommandGroup {
         this.m_wrist = wrist;
         this.m_extend = extendarm;
         addRequirements(arm, wrist, extendarm);
-        if (m_extend.getPosition()>0.1){
-            addCommands(new MoveExtension(extensiondistance, extendarm));
+        if (m_extend.extended == true){
+            addCommands(
+                new ScheduleCommand( new MoveExtension(extensiondistance, extendarm)).andThen(Commands.waitSeconds(2)),
+                Commands.parallel(
+                    new MoveArm(armangle, m_arm),
+                    new MoveWrist(wristangle, m_wrist)
+                    )
+                );
+        } else{
+            addCommands(
+                new ScheduleCommand( Commands.parallel(
+                        new MoveArm(armangle, m_arm),
+                        new MoveWrist(wristangle, m_wrist))
+                    ).andThen(Commands.waitSeconds(2)),
+                    new MoveExtension(extensiondistance, extendarm)
+                );
         }
-        //DriverStation.reportWarning(String.format("Arm: %0.2d Wrist: %0.2d Extension: %0.2d",armangle,wristangle,extensiondistance),false);
-        addCommands(
-            new MoveArm(armangle, m_arm),
-            new MoveWrist(wristangle, m_wrist),
-            new MoveExtension(extensiondistance, extendarm)
-            );
+        System.out.print(String.format("Target Arm: %.2f Extension: %.2f Wrist: %.2f \n",armangle,extensiondistance, wristangle));
+        
     
     }
 }
