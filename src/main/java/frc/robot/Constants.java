@@ -110,20 +110,26 @@ public class Constants {
         public static final double wristAngle = 101.0;
         public static final double extensionDistance = 2.1;
     }
-    public static final class Position3{ // Midlle Node
+    public static final class Position3{ // Middle Node
         public static final double armAngle = 230.0;
         public static final double wristAngle = 164.0;
         public static final double extensionDistance = 2.0;
     }
     public static final class Position4{ // High node
-        public static final double armAngle = 253.0;
-        public static final double wristAngle = 177.1;
+        public static final double armAngle = 278.0;
+        public static final double wristAngle = 194.0;
         public static final double extensionDistance = 21.0;
     }
     public static final class Position5{ // Human player station pickup
         public static final double armAngle = 195.4;
         public static final double wristAngle = 164.0;
         public static final double extensionDistance = -5.4;
+    }
+
+    public static final class Position6{ // cone on the ground
+        public static final double armAngle = 2.0;
+        public static final double wristAngle = 220.0;
+        public static final double extensionDistance = -74.0;
     }
 }
 

@@ -150,6 +150,7 @@ public class RobotContainer {
       Trigger button8 = xroller.button(8);
       //Driver right Joystick max override
       Trigger Driverbutton5 = new JoystickButton(rightJoystick, 5);
+      Trigger Driverbutton1 = new JoystickButton(rightJoystick, 1);
 
       button3.onTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position1.armAngle, Position1.wristAngle, Position1.extensionDistance));
       button4.onTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position2.armAngle, Position2.wristAngle, Position2.extensionDistance));
@@ -157,7 +158,9 @@ public class RobotContainer {
       button2.onTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position4.armAngle, Position4.wristAngle, Position4.extensionDistance));
       button5.onTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position5.armAngle, Position5.wristAngle, Position5.extensionDistance));
       button6.whileTrue(new InstantCommand( m_wrist::decrement).repeatedly());
-      button7.onTrue(new ConditionalCommand(new CloseManipulator(m_pneumatics), new OpenManipulator(m_pneumatics), m_pneumatics::manipulator_open));
+      //change button 7
+      button7.whileTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position6.armAngle, Position6.wristAngle, Position6.extensionDistance));
+      Driverbutton1.whileTrue(new ConditionalCommand(new CloseManipulator(m_pneumatics), new OpenManipulator(m_pneumatics), m_pneumatics::manipulator_open));
       button8.whileTrue(new InstantCommand( m_wrist::increment).repeatedly());
       xroller.povRight().and(button6).whileTrue( new InstantCommand( m_extension::increment).repeatedly());
       xroller.povRight().and(button8).whileTrue(new InstantCommand( m_extension::decrement).repeatedly());
