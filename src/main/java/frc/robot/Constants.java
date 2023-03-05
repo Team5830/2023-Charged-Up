@@ -111,8 +111,8 @@ public class Constants {
         public static final double extensionDistance = 2.1;
     }
     public static final class Position3{ // Middle Node
-        public static final double armAngle = 230.0;
-        public static final double wristAngle = 164.0;
+        public static final double armAngle = 246.0;
+        public static final double wristAngle = 188.0;
         public static final double extensionDistance = 2.0;
     }
     public static final class Position4{ // High node
