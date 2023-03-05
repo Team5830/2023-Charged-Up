@@ -2,21 +2,24 @@ package frc.robot.commands;
 
 //import edu.wpi.first.wpilibj.DriverStation; Ha Ha Ha, Good Bye Sucker!
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 import frc.robot.subsystems.*;
 
 public class Positioning extends SequentialCommandGroup {
     private Arm m_arm;
     private Wrist m_wrist;
     private ExtendArm m_extend;
+    private DriveTrain m_drive;
 
-    public Positioning(Arm arm, Wrist wrist, ExtendArm extendarm, double armangle, double wristangle, double extensiondistance) {
+    public Positioning(Arm arm, Wrist wrist, ExtendArm extendarm, DriveTrain drive,  double armangle, double wristangle, double extensiondistance) {
         this.m_arm =  arm;
         this.m_wrist = wrist;
         this.m_extend = extendarm;
-        addRequirements(arm, wrist, extendarm);
+        this.m_drive = drive;
+        addRequirements(m_arm, m_wrist, m_extend, m_drive);
+        if (10.0<extensiondistance){
+            m_drive.SetMaxSpeed(0.5);
+        }
         addCommands(
             new MoveExtension(0, extendarm),
             Commands.parallel(

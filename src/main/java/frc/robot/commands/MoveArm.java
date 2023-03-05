@@ -42,6 +42,5 @@ public class MoveArm extends CommandBase {
   @Override
   public boolean isFinished() {
     return arm.AtTarget();
-    //return false;
   }
 }

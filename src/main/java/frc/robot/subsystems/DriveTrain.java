@@ -146,7 +146,10 @@ public class DriveTrain extends SubsystemBase {
         }
         // System.out.println("%0.2f %0.2f",leftspeed,rightspeed);
         m_drive.tankDrive(-leftspeed, -rightspeed, true);
-      }
+    }
+    public void SetMaxSpeed(double max){
+      maxspeed = max;
+    }
 
     public double getPitch() {
         return ahrs.getPitch();
@@ -184,6 +187,7 @@ public class DriveTrain extends SubsystemBase {
         SmartDashboard.putNumber("Pitch", getPitch());
         SmartDashboard.putNumber("Angle", ahrs.getAngle());
         SmartDashboard.putNumber("Distance", getDistance());
+        /* 
         SmartDashboard.putNumber("rightposition", -rightLeadEncoder.getPosition());
         SmartDashboard.putNumber("leftposition", leftLeadEncoder.getPosition());
         SmartDashboard.putNumber("Max Speed", maxspeed);
@@ -193,7 +197,7 @@ public class DriveTrain extends SubsystemBase {
         }
         else{
           maxspeed = 1;
-        }
+        }*/
     }
     public void brake() {
      double rightarget = rightLeadEncoder.getPosition();

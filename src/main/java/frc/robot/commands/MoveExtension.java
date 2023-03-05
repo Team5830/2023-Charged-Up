@@ -27,7 +27,6 @@ public class MoveExtension extends CommandBase {
     }
     @Override
     public boolean isFinished() {
-      //return false;
       return m_extendarm.AtTarget();
     }
 }
