@@ -17,10 +17,9 @@ public class Positioning extends SequentialCommandGroup {
         this.m_extend = extendarm;
         this.m_drive = drive;
         addRequirements(m_arm, m_wrist, m_extend, m_drive);
-        if (10.0<extensiondistance){
+        if (extensiondistance > 10.0){
             m_drive.SetMaxSpeed(0.5);
-        }
-        else{
+        } else {
             m_drive.SetMaxSpeed(1);
         }
         addCommands(
