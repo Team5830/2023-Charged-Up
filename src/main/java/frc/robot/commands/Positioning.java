@@ -23,12 +23,12 @@ public class Positioning extends SequentialCommandGroup {
             m_drive.SetMaxSpeed(1);
         }
         addCommands(
-            new MoveExtension(0, extendarm).withTimeout(10),
+            new MoveExtension(0, extendarm).withTimeout(5),
             Commands.parallel(
-                new MoveArm(armangle, m_arm).withTimeout(10),
-                new MoveWrist(wristangle, m_wrist).withTimeout(10)
+                new MoveArm(armangle, m_arm).withTimeout(5),
+                new MoveWrist(wristangle, m_wrist).withTimeout(5)
             ),
-            new MoveExtension(extensiondistance, extendarm).withTimeout(10)
+            new MoveExtension(extensiondistance, extendarm).withTimeout(5)
         );
         /* 
         if (m_extend.extended){
