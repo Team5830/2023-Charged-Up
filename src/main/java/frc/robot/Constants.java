@@ -52,12 +52,12 @@ public class Constants {
 
 
     public static final class MovePID {
-        public static final double lP = 1.0;
+        public static final double lP = 0.1;
         public static final double lI = 0.0;
         public static final double lD = 0.0;
         public static final double lf = 0.0;
-        public static final double lMaxAlignSpeed = 2; // Inches per second
-        public static final double lAlignTolerance = 0.01; // Meters
+        public static final double lMaxAlignSpeed = 0.5; // Meters per second
+        public static final double lAlignTolerance = 0.2; // Meters
         public static final double rP = 1.0;
         public static final double rI = 0.0;
         public static final double rD = 0.0;
@@ -69,7 +69,7 @@ public class Constants {
     public static final class ArmPID {
         public static final double P = 0.01;
         public static final double I = 0.0;
-        public static final double D = 0.0;
+        public static final double D = 0.003;
         public static final double FF = 0.0;
         public static final double MaxOutput = .4;
         public static final double MinOutput = -.4;
@@ -81,7 +81,7 @@ public class Constants {
     public static final class WristPID {
         public static final double P = 0.01; //.009;
         public static final double I = 0.0;    //.000003; 
-        public static final double D = 0.0;    //.03;
+        public static final double D = 0.03;    //.03;
         public static final double FF = 0;
         public static final double MaxOutput = .7;
         public static final double MinOutput = -.7;
@@ -102,7 +102,7 @@ public class Constants {
     }
     public static final class Position1{ // Retracted
         public static final double armAngle = 0.0;
-        public static final double wristAngle = 0.0;
+        public static final double wristAngle = -9.0;
         public static final double extensionDistance = -5.0;
     }
     public static final class Position2{ // Pickup Position
