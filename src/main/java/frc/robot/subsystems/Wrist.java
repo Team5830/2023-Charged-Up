@@ -96,6 +96,6 @@ public class Wrist extends SubsystemBase {
     @Override
     public void periodic(){
         SmartDashboard.putNumber("WristPosition", wristEncoder.getPosition());
-        SmartDashboard.getNumber("wristarget", wristarget );
+        //SmartDashboard.getNumber("wristarget", wristarget );
     }
 }

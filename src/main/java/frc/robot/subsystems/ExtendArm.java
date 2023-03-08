@@ -67,9 +67,11 @@ public class ExtendArm extends SubsystemBase{
     public double getPosition(){
         return -extencoder.getPosition();
     }
+
     public void Stop() {
         extemoroller.stopMotor();
     }
+
     public boolean AtTarget(){
         double curposition = extencoder.getPosition();
         DriverStation.reportWarning(String.format("Position: %f",curposition),false);
@@ -81,10 +83,12 @@ public class ExtendArm extends SubsystemBase{
             return false;
         }
     }
+
     public void increment(){
         extensionTarget = extensionTarget + 4.0;
         extemPIDer.setReference(extensionTarget, ControlType.kPosition);
     }
+
     public void decrement(){
         extensionTarget = extensionTarget - 4.0;
         extemPIDer.setReference(extensionTarget, ControlType.kPosition);
@@ -92,7 +96,9 @@ public class ExtendArm extends SubsystemBase{
 
     @Override
     public void periodic(){
+        
         SmartDashboard.putNumber("Extension Position", getPosition());
+        /* 
         SmartDashboard.getNumber("Extension Target", extensionTarget);
         if (getPosition()>10.0){
             extended = true;
@@ -101,5 +107,6 @@ public class ExtendArm extends SubsystemBase{
             extended = false;
           }
         SmartDashboard.putBoolean("Extended", extended);
+        */
     }
 }

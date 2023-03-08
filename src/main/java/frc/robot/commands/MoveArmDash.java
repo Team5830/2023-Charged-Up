@@ -41,7 +41,7 @@ public class MoveArmDash extends CommandBase {
   public void end(boolean interrupted) {
     // Called once the command ends or is interrupted.
     //arm.Stop();
-    
+    SmartDashboard.putNumber("ArmPosition", arm.Position());
   }
   // Returns true when the command should end.
   @Override

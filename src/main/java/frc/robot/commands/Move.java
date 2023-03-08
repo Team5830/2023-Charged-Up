@@ -22,8 +22,8 @@ public class Move extends PIDCommand {
 
   public Move(double targetDistanceMeters, DriveTrain drive) {
     super(new PIDController(MovePID.lP, MovePID.lI, MovePID.lD),
-        drive::getDistance, targetDistanceMeters, output -> drive.TankDrive(output, output), drive);
-
+        drive::getDistance, targetDistanceMeters, output -> drive.TankDrive(-output, -output), drive);
+    drive.SetMaxSpeed(0.5);
     //drive.updatePID();
     drive.resetEncoders();
 
@@ -33,6 +33,7 @@ public class Move extends PIDCommand {
     getController()
         .setTolerance(MovePID.lAlignTolerance, MovePID.lMaxAlignSpeed);
   }
+  //
 
   @Override
   public boolean isFinished() {
