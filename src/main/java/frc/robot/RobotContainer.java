@@ -84,7 +84,9 @@ public class RobotContainer {
     SmartDashboard.putData("Position3", new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position3.armAngle, Position3.wristAngle, Position3.extensionDistance));
     SmartDashboard.putData("Position4", new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position4.armAngle, Position4.wristAngle, Position4.extensionDistance));
     SmartDashboard.putData("Position5", new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position5.armAngle, Position5.wristAngle, Position5.extensionDistance));
-    SmartDashboard.putData("Move", new MoveDash( m_driveTrain) );
+    //SmartDashboard.putData("Move", new MoveDash( m_driveTrain) );
+
+    SmartDashboard.putData("Move", new Move(1.0, m_driveTrain) );
     SmartDashboard.putData("Turn", new TurnDash( m_driveTrain) );
     SmartDashboard.putNumber("ArmTarget", 0);
     SmartDashboard.putNumber("Arm P", Constants.ArmPID.P);
@@ -157,11 +159,13 @@ public class RobotContainer {
       button1.onTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position3.armAngle, Position3.wristAngle, Position3.extensionDistance));
       button2.onTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position4.armAngle, Position4.wristAngle, Position4.extensionDistance));
       button5.onTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position5.armAngle, Position5.wristAngle, Position5.extensionDistance));
-      button6.whileTrue(new InstantCommand( m_wrist::decrement).repeatedly());
+      // button6.whileTrue(new InstantCommand( m_wrist::decrement).repeatedly());
+      // button8.whileTrue(new InstantCommand( m_wrist::increment).repeatedly());
       //change button 7
       button7.whileTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position6.armAngle, Position6.wristAngle, Position6.extensionDistance));
       Driverbutton1.whileTrue(new ConditionalCommand(new CloseManipulator(m_pneumatics), new OpenManipulator(m_pneumatics), m_pneumatics::manipulator_open));
-      button8.whileTrue(new InstantCommand( m_wrist::increment).repeatedly());
+      xroller.povDown().and(button6).whileTrue( new InstantCommand( m_wrist::increment).repeatedly());
+      xroller.povDown().and(button8).whileTrue(new InstantCommand( m_wrist::decrement).repeatedly());
       xroller.povRight().and(button6).whileTrue( new InstantCommand( m_extension::increment).repeatedly());
       xroller.povRight().and(button8).whileTrue(new InstantCommand( m_extension::decrement).repeatedly());
       xroller.povLeft().and(button6).whileTrue(new InstantCommand( m_arm::increment).repeatedly());

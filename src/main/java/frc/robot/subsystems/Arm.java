@@ -99,6 +99,6 @@ public class Arm extends SubsystemBase {
     @Override
     public void periodic(){
         SmartDashboard.putNumber("ArmPosition", armEncoder.getPosition());
-        SmartDashboard.getNumber("karget", karget );
+        //SmartDashboard.getNumber("karget", karget );
     }
 }

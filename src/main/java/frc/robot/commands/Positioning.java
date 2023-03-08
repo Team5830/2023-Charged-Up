@@ -20,13 +20,16 @@ public class Positioning extends SequentialCommandGroup {
         if (10.0<extensiondistance){
             m_drive.SetMaxSpeed(0.5);
         }
+        else{
+            m_drive.SetMaxSpeed(1);
+        }
         addCommands(
-            new MoveExtension(0, extendarm),
+            new MoveExtension(0, extendarm).withTimeout(10),
             Commands.parallel(
-                new MoveArm(armangle, m_arm),
-                new MoveWrist(wristangle, m_wrist)
+                new MoveArm(armangle, m_arm).withTimeout(10),
+                new MoveWrist(wristangle, m_wrist).withTimeout(10)
             ),
-            new MoveExtension(extensiondistance, extendarm)
+            new MoveExtension(extensiondistance, extendarm).withTimeout(10)
         );
         /* 
         if (m_extend.extended){

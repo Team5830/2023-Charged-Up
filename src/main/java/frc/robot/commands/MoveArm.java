@@ -22,6 +22,7 @@ public class MoveArm extends CommandBase {
   public void initialize() {
     arm.updatePID();
     arm.move(target);
+    System.out.print("Started MoveArm command");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -35,7 +36,7 @@ public class MoveArm extends CommandBase {
   public void end(boolean interrupted) {
     // Called once the command ends or is interrupted.
     //arm.Stop();
-    
+    System.out.print("Stopped MoveArm command");
   }
 
   // Returns true when the command should end.
