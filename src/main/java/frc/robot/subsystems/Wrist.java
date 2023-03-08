@@ -22,7 +22,7 @@ public class Wrist extends SubsystemBase {
         wristMotorController = new CANSparkMax(ValueConstants.kwristmoter , CANSparkMax.MotorType.kBrushless);
         wristMotorController.restoreFactoryDefaults();
         wristEncoder = wristMotorController.getEncoder();
-        wristEncoder.setPositionConversionFactor(80);
+        wristEncoder.setPositionConversionFactor(32);
         wristEncoder.setPosition(0.0);
         wristMotorController.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
         wristMotorController.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);    
@@ -41,6 +41,7 @@ public class Wrist extends SubsystemBase {
         m_kwristmoterPID.setFF(WristPID.FF);
         kFF = WristPID.FF;
         m_kwristmoterPID.setOutputRange(WristPID.MinOutput, WristPID.MaxOutput);
+        move(0);
         //m_kwristmoterPID.setPositionPIDWrappingMaxInput(180);
         //m_kwristmoterPID.setPositionPIDWrappingMinInput(-180);
         //m_kwristmoterPID.setPositionPIDWrappingEnabled(true);
@@ -95,6 +96,6 @@ public class Wrist extends SubsystemBase {
     @Override
     public void periodic(){
         SmartDashboard.putNumber("WristPosition", wristEncoder.getPosition());
-        SmartDashboard.getNumber("wristarget", wristarget );
+        //SmartDashboard.getNumber("wristarget", wristarget );
     }
 }

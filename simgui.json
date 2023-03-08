@@ -5,14 +5,29 @@
       "/SmartDashboard/Arm": "Subsystem",
       "/SmartDashboard/Auto Mode": "String Chooser",
       "/SmartDashboard/Autonomous Command": "Command",
+      "/SmartDashboard/Brake": "Command",
+      "/SmartDashboard/Brake Release": "Command",
       "/SmartDashboard/Close Manipulator": "Command",
       "/SmartDashboard/DriveTrain": "Subsystem",
+      "/SmartDashboard/Move": "Command",
       "/SmartDashboard/Open Manipulator": "Command",
       "/SmartDashboard/Pneumatics": "Subsystem",
+      "/SmartDashboard/Position1": "Command",
+      "/SmartDashboard/Position2": "Command",
+      "/SmartDashboard/Position3": "Command",
+      "/SmartDashboard/Position4": "Command",
+      "/SmartDashboard/Position5": "Command",
+      "/SmartDashboard/Turn": "Command",
+      "/SmartDashboard/extend": "Command",
       "/SmartDashboard/moveArm": "Command",
       "/SmartDashboard/moveWrist": "Command"
     },
     "windows": {
+      "/SmartDashboard/Move": {
+        "window": {
+          "visible": true
+        }
+      },
       "/SmartDashboard/moveWrist": {
         "window": {
           "visible": true

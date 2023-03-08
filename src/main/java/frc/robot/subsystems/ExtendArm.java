@@ -40,6 +40,7 @@ public class ExtendArm extends SubsystemBase{
             extemoroller.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, ExtendPID.ReverseLimit);
             extemoroller.setIdleMode(CANSparkMax.IdleMode.kBrake);
             extended = false;
+            move(0);
         }catch (RuntimeException ex){
             DriverStation.reportError("Error Configuring Extension Motor"+ex.getMessage(), true);
         }
@@ -59,35 +60,53 @@ public class ExtendArm extends SubsystemBase{
     }
 
     public void move(double distance){
-        extensionTarget = distance;
+        extensionTarget = -distance;
         extemPIDer.setReference(extensionTarget, ControlType.kPosition);
     }
 
     public double getPosition(){
-        return extencoder.getPosition();
+        return -extencoder.getPosition();
     }
+
     public void Stop() {
         extemoroller.stopMotor();
     }
+
+    public boolean AtTarget(){
+        double curposition = extencoder.getPosition();
+        DriverStation.reportWarning(String.format("Position: %f",curposition),false);
+        if ( Math.abs(curposition - extensionTarget) <=ExtendPID.Tolerance){
+            DriverStation.reportWarning("True",false);
+            return true;
+        }else{
+            DriverStation.reportWarning(String.format("false: %f",Math.abs(curposition - extensionTarget)),false);
+            return false;
+        }
+    }
+
     public void increment(){
-        extensionTarget = extensionTarget + 0.1;
+        extensionTarget = extensionTarget + 4.0;
         extemPIDer.setReference(extensionTarget, ControlType.kPosition);
     }
+
     public void decrement(){
-        extensionTarget = extensionTarget - 0.1;
+        extensionTarget = extensionTarget - 4.0;
         extemPIDer.setReference(extensionTarget, ControlType.kPosition);
     }
 
     @Override
     public void periodic(){
-        SmartDashboard.putNumber("Extension Position", extencoder.getPosition());
+        
+        SmartDashboard.putNumber("Extension Position", getPosition());
+        /* 
         SmartDashboard.getNumber("Extension Target", extensionTarget);
-        if (extencoder.getPosition()>0.5){
+        if (getPosition()>10.0){
             extended = true;
           }
           else{
             extended = false;
           }
         SmartDashboard.putBoolean("Extended", extended);
+        */
     }
 }

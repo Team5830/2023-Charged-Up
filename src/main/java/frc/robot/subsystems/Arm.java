@@ -10,7 +10,6 @@ import frc.robot.Constants.ValueConstants;
 import frc.robot.Constants.ArmPID;
 
 public class Arm extends SubsystemBase {
-
     private CANSparkMax armMotorController;
     private RelativeEncoder armEncoder;
     private SparkMaxPIDController m_karmoterPID;
@@ -39,6 +38,7 @@ public class Arm extends SubsystemBase {
         m_karmoterPID.setFF(ArmPID.FF);
         kFF = ArmPID.FF;
         m_karmoterPID.setOutputRange(ArmPID.MinOutput, ArmPID.MaxOutput);
+        move(0);
         //m_karmoterPID.setPositionPIDWrappingMaxInput(180);
         //m_karmoterPID.setPositionPIDWrappingMinInput(-180);
         //m_karmoterPID.setPositionPIDWrappingEnabled(true);
@@ -47,7 +47,9 @@ public class Arm extends SubsystemBase {
         }catch (RuntimeException ex) {
             DriverStation.reportError("Error Configuring Drivetrain" + ex.getMessage(), true);
         }
+    
     }
+    
     public void updatePID(){
         double p = SmartDashboard.getNumber("Arm P", ArmPID.P);
         double i = SmartDashboard.getNumber("Arm I", ArmPID.I);
@@ -86,17 +88,17 @@ public class Arm extends SubsystemBase {
         SmartDashboard.putNumber("ArmPosition", armEncoder.getPosition());
     }
     public void increment(){
-        karget = karget + 2;
+        karget = karget + 5;
         m_karmoterPID.setReference(karget, ControlType.kPosition);
     }
     public void decrement(){
-        karget = karget - 2;
+        karget = karget - 5;
         m_karmoterPID.setReference(karget, ControlType.kPosition);
     }
 
     @Override
     public void periodic(){
         SmartDashboard.putNumber("ArmPosition", armEncoder.getPosition());
-        SmartDashboard.getNumber("karget", karget );
+        //SmartDashboard.getNumber("karget", karget );
     }
 }

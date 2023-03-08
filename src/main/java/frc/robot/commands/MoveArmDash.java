@@ -3,7 +3,6 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
-import frc.robot.commands.MoveArm;
 import frc.robot.subsystems.Arm;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -41,13 +40,12 @@ public class MoveArmDash extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     // Called once the command ends or is interrupted.
-    arm.Stop();
-    
+    //arm.Stop();
+    SmartDashboard.putNumber("ArmPosition", arm.Position());
   }
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    //return arm.AtTarget();
-    return false;
+    return arm.AtTarget();
   }
 }

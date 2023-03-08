@@ -25,6 +25,7 @@ public class Turn extends PIDCommand {
         // Require the drive
         drive);
     drive.resetHeading();
+    System.out.print(String.format("Turn Target %f\n",targetAngleDegrees));
     // Set the controller to be continuous (because it is an angle controller)
     getController().enableContinuousInput(-180, 180);
     // Set the controller tolerance - the delta tolerance ensures the robot is stationary at the
