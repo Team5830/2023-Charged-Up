@@ -22,7 +22,7 @@ public class Wrist extends SubsystemBase {
         wristMotorController = new CANSparkMax(ValueConstants.kwristmoter , CANSparkMax.MotorType.kBrushless);
         wristMotorController.restoreFactoryDefaults();
         wristEncoder = wristMotorController.getEncoder();
-        wristEncoder.setPositionConversionFactor(80);
+        wristEncoder.setPositionConversionFactor(400);
         wristEncoder.setPosition(0.0);
         wristMotorController.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
         wristMotorController.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);    
