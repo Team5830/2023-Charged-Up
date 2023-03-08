@@ -18,7 +18,7 @@
     "###/SmartDashboard/Move": {
       "Collapsed": "0",
       "Pos": "23,31",
-      "Size": "90,89"
+      "Size": "53,89"
     },
     "###/SmartDashboard/moveWrist": {
       "Collapsed": "0",
@@ -68,7 +68,7 @@
     "Robot State": {
       "Collapsed": "0",
       "Pos": "5,20",
-      "Size": "126,129"
+      "Size": "46,32"
     }
   }
 }
