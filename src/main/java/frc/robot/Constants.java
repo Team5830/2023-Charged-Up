@@ -102,7 +102,7 @@ public class Constants {
     }
     public static final class Position1{ // Retracted
         public static final double armAngle = 0.0;
-        public static final double wristAngle = 0.0;
+        public static final double wristAngle = 15.0;
         public static final double extensionDistance = -8.0;
     }
     public static final class Position2{ // Pickup Position
@@ -111,7 +111,7 @@ public class Constants {
         public static final double extensionDistance = 10.0;
     }
     public static final class Position3{ // Middle Node
-        public static final double armAngle = 246.0;
+        public static final double armAngle = 236.0; //246
         public static final double wristAngle = 188.0;
         public static final double extensionDistance = 2.0;
     }
