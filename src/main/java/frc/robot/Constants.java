@@ -81,16 +81,16 @@ public class Constants {
     public static final class WristPID {
         public static final double P = 0.01; //.009;
         public static final double I = 0.0;    //.000003; 
-        public static final double D = 0.0;    //.03;
+        public static final double D = 0.03;    //.03;
         public static final double FF = 0;
         public static final double MaxOutput = .7;
         public static final double MinOutput = -.7;
-        public static final float ForwardLimit = 220;
+        public static final float ForwardLimit = 230;
         public static final float ReverseLimit = 0;
         public static final double Tolerance = 2.0;
     }
     public static final class ExtendPID {
-        public static final double P = 0.03;
+        public static final double P = 0.02;
         public static final double I = 0.0;
         public static final double D = 0.5;
         public static final double FF =0.0;
@@ -103,12 +103,12 @@ public class Constants {
     public static final class Position1{ // Retracted
         public static final double armAngle = 0.0;
         public static final double wristAngle = 0.0;
-        public static final double extensionDistance = -5.0;
+        public static final double extensionDistance = -8.0;
     }
     public static final class Position2{ // Pickup Position
         public static final double armAngle = 49.1;
         public static final double wristAngle = 101.0;
-        public static final double extensionDistance = 2.1;
+        public static final double extensionDistance = 10.0;
     }
     public static final class Position3{ // Middle Node
         public static final double armAngle = 246.0;
@@ -121,14 +121,14 @@ public class Constants {
         public static final double extensionDistance = 21.0;
     }
     public static final class Position5{ // Human player station pickup
-        public static final double armAngle = 195.4;
-        public static final double wristAngle = 164.0;
-        public static final double extensionDistance = -5.4;
+        public static final double armAngle = 221.0;
+        public static final double wristAngle = 189.0;
+        public static final double extensionDistance = 2.3;
     }
 
     public static final class Position6{ // cone on the ground
         public static final double armAngle = 77.0;
-        public static final double wristAngle = 210.0;
+        public static final double wristAngle = 225.0;
         public static final double extensionDistance = 4.0;
     }
 }

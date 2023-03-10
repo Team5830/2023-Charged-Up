@@ -3,6 +3,7 @@ package frc.robot.commands;
 //import edu.wpi.first.wpilibj.DriverStation; Ha Ha Ha, Good Bye Sucker!
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.*;
 
 public class Positioning extends SequentialCommandGroup {
@@ -28,6 +29,7 @@ public class Positioning extends SequentialCommandGroup {
                 new MoveArm(armangle, m_arm).withTimeout(5),
                 new MoveWrist(wristangle, m_wrist).withTimeout(5)
             ),
+            new WaitCommand(0.5),
             new MoveExtension(extensiondistance, extendarm).withTimeout(5)
         );
         /* 
