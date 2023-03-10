@@ -85,12 +85,12 @@ public class ExtendArm extends SubsystemBase{
     }
 
     public void increment(){
-        extensionTarget = extensionTarget + 4.0;
+        extensionTarget = extensionTarget + 3.0;
         extemPIDer.setReference(extensionTarget, ControlType.kPosition);
     }
 
     public void decrement(){
-        extensionTarget = extensionTarget - 4.0;
+        extensionTarget = extensionTarget - 3.0;
         extemPIDer.setReference(extensionTarget, ControlType.kPosition);
     }
 

@@ -82,7 +82,7 @@ public class DriveTrain extends SubsystemBase {
       leftFollowMotorController.restoreFactoryDefaults();
     
       m_drivetrainPIDcontleft = leftLeadMotorController.getPIDController();
-      maxspeed = 1;
+      maxspeed = 0.7;
       extended = false;
 
       leftFollowMotorController.follow(leftLeadMotorController);

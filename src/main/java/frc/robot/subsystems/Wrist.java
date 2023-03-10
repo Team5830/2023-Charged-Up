@@ -85,11 +85,11 @@ public class Wrist extends SubsystemBase {
         wristMotorController.set(0);
     }
     public void increment(){
-        wristarget = wristarget + 5;
+        wristarget = wristarget + 2;
         m_kwristmoterPID.setReference(wristarget, ControlType.kPosition);
     }
     public void decrement(){
-        wristarget = wristarget - 5;
+        wristarget = wristarget - 2;
         m_kwristmoterPID.setReference(wristarget, ControlType.kPosition);
     }
 
