@@ -152,6 +152,9 @@ public class DriveTrain extends SubsystemBase {
     public void SetMaxSpeed(double max){
       maxspeed = max;
     }
+    public void feed(){
+      m_drive.feed();
+    }
 
     public double getPitch() {
         return ahrs.getPitch();
