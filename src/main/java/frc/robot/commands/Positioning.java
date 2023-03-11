@@ -1,5 +1,7 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj.DriverStation; Ha Ha Ha, Good Bye Sucker!
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -12,7 +14,7 @@ public class Positioning extends SequentialCommandGroup {
     private ExtendArm m_extend;
     private DriveTrain m_drive;
 
-    public Positioning(Arm arm, Wrist wrist, ExtendArm extendarm, DriveTrain drive,  double armangle, double wristangle, double extensiondistance) {
+    public Positioning(Arm arm, Wrist wrist, ExtendArm extendarm, DriveTrain drive,  double armangle, double wristangle, double extensiondistance, boolean wristFirst) {
         this.m_arm =  arm;
         this.m_wrist = wrist;
         this.m_extend = extendarm;
@@ -23,24 +25,24 @@ public class Positioning extends SequentialCommandGroup {
         } else {
             m_drive.SetMaxSpeed(0.7);
         }
-        if (m_arm.Position() > 100 ){
+        if(wristFirst) {
             addCommands(
-                new MoveWrist(wristangle, m_wrist).withTimeout(5),
-                new MoveExtension(-3, extendarm).withTimeout(5),
-                new MoveArm(armangle, m_arm).withTimeout(5),
-                //new WaitCommand(0.5),
-                new MoveExtension(extensiondistance, extendarm).withTimeout(5)
+                new MoveExtension(-3, extendarm).withTimeout(1),
+                new MoveWrist(wristangle, m_wrist).withTimeout(1),  
+                new MoveArm(armangle, m_arm).withTimeout(1),  
+                    //new WaitCommand(0.5),
+                new MoveExtension(extensiondistance, extendarm).withTimeout(1)
             );
-    } else {
-        addCommands(
-            new MoveExtension(-3, extendarm).withTimeout(5),
-            new MoveWrist(wristangle, m_wrist).withTimeout(5),    
-            new MoveArm(armangle, m_arm).withTimeout(5),
-                //new WaitCommand(0.5),
-                new MoveExtension(extensiondistance, extendarm).withTimeout(5)
-        );
 
-    }
+        } else {
+            addCommands(
+                new MoveExtension(-3, extendarm).withTimeout(1),
+                new MoveArm(armangle, m_arm).withTimeout(1),
+                new MoveWrist(wristangle, m_wrist).withTimeout(1),    
+                    //new WaitCommand(0.5),
+                new MoveExtension(extensiondistance, extendarm).withTimeout(1)
+            );
+        }
         /* 
         if (m_extend.extended){
             addCommands(
