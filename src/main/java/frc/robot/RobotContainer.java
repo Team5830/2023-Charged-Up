@@ -205,7 +205,8 @@ public Joystick getRightJoystick() {
       new WaitCommand(0.75),
       new CloseManipulator( m_pneumatics ),
       new Positioning(m_arm,m_wrist,m_extension,m_driveTrain, Position1.armAngle, Position1.wristAngle, Position1.extensionDistance,true),
-      new Move(-2.5, m_driveTrain)
+      new Move(-4.0, m_driveTrain),
+      new InstantCommand(m_driveTrain::OverrideMax)
     );
   }
   

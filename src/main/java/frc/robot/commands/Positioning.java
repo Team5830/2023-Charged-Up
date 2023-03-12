@@ -23,7 +23,7 @@ public class Positioning extends SequentialCommandGroup {
         if (extensiondistance > 10.0){
             m_drive.SetMaxSpeed(0.2);
         } else {
-            m_drive.SetMaxSpeed(0.7);
+            m_drive.SetMaxSpeed(0.9);
         }
         if(wristFirst) {
             addCommands(

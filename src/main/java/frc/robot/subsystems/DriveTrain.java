@@ -82,7 +82,7 @@ public class DriveTrain extends SubsystemBase {
       leftFollowMotorController.restoreFactoryDefaults();
     
       m_drivetrainPIDcontleft = leftLeadMotorController.getPIDController();
-      maxspeed = 0.7;
+      maxspeed = 0.9;
       extended = false;
 
       leftFollowMotorController.follow(leftLeadMotorController);
@@ -185,16 +185,17 @@ public class DriveTrain extends SubsystemBase {
         rightLeadEncoder.setPosition(0);
     }
     public void OverrideMax(){
-      maxspeed=1;
+      maxspeed=0.9;
     }
     @Override
     public void periodic() {
-      //m_drive.feed();
+      m_drive.feed();
       SmartDashboard.putNumber("Distance", getDistance());
-        /*
+        
         SmartDashboard.putNumber("Pitch", getPitch());
         SmartDashboard.putNumber("Angle", ahrs.getAngle());
-        SmartDashboard.putNumber("Distance", getDistance());
+        
+        /*SmartDashboard.putNumber("Distance", getDistance());
          
         SmartDashboard.putNumber("rightposition", -rightLeadEncoder.getPosition());
         SmartDashboard.putNumber("leftposition", leftLeadEncoder.getPosition());
