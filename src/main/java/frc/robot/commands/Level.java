@@ -15,11 +15,12 @@ public class Level extends PIDCommand {
   public Level(double LevelTarget, DriveTrain drive) {
 
     super(new PIDController(LevelPID.P, LevelPID.I, LevelPID.D),
-        drive::getPitch, LevelTarget, output -> drive.TankDrive(-output, -output), drive);
+        drive::getPitch, LevelTarget, output -> drive.TankDrive( -output, -output), drive);
 
     // Set the controller tolerance - the delta tolerance ensures the robot is
     // stationary at the
     // setpoint before it is considered as having reached the reference
+    //drive.SetMaxSpeed(0.2);
     getController()
         .setTolerance(LevelPID.LevelTolerance, LevelPID.Level);
 

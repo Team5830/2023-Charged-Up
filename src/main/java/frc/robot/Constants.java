@@ -33,11 +33,11 @@ public class Constants {
     
 
     public static final class LevelPID {
-        public static final double P = 0.08;
+        public static final double P = 0.04;
         public static final double I = 0.0;
-        public static final double D = 0.0;
+        public static final double D = 0.02;
         public static final double f = 0.0;
-        public static final double LevelTolerance = 0.5; // Measured in degrees
+        public static final double LevelTolerance = 2.0; // Measured in degrees
         public static final double Level = 1;
     }
 

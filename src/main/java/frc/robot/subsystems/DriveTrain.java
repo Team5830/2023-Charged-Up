@@ -14,8 +14,11 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup; 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.*;
+import frc.robot.commands.Drive;
+import frc.robot.commands.Move;
 
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -61,6 +64,8 @@ public class DriveTrain extends SubsystemBase {
     private double lP,lI,lD,rP,rI,rD;
     private double maxspeed;
     private boolean extended;
+    public boolean unbalanced;
+    public boolean nunbalanced;
     
     /**
     *
@@ -191,22 +196,15 @@ public class DriveTrain extends SubsystemBase {
     public void periodic() {
       m_drive.feed();
       SmartDashboard.putNumber("Distance", getDistance());
+      SmartDashboard.putNumber("Max Speed", maxspeed);
+      SmartDashboard.putNumber("Pitch", getPitch());
+      SmartDashboard.putNumber("Angle", ahrs.getAngle());
         
-        SmartDashboard.putNumber("Pitch", getPitch());
-        SmartDashboard.putNumber("Angle", ahrs.getAngle());
-        
-        /*SmartDashboard.putNumber("Distance", getDistance());
-         
+
+        /*
         SmartDashboard.putNumber("rightposition", -rightLeadEncoder.getPosition());
         SmartDashboard.putNumber("leftposition", leftLeadEncoder.getPosition());
-        SmartDashboard.putNumber("Max Speed", maxspeed);
-        SmartDashboard.getBoolean("Extended", extended);
-        if(extended == true){
-          maxspeed = 0.5;
-        }
-        else{
-          maxspeed = 1;
-        }*/
+        */
     }
     public void brake() {
      double rightarget = rightLeadEncoder.getPosition();
@@ -217,7 +215,7 @@ public class DriveTrain extends SubsystemBase {
     public void brakerelease(){
        rightLeadMotorController.stopMotor();
        leftLeadMotorController.stopMotor();
-    }
+    } 
 }
 
 
