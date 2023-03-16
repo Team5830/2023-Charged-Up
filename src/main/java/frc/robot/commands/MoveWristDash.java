@@ -20,21 +20,28 @@ public class MoveWristDash extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    wrist.updatePID();
     double target = SmartDashboard.getNumber("WristTarget", wrist.Position());
-    new MoveWrist(target, wrist);
+    wrist.move(target);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
-  //@Override
-  //public void execute() {}
+  @Override
+  public void execute() {
+    double target = SmartDashboard.getNumber("WristTarget", wrist.Position());
+    wrist.move(target);
+  }
 
   // Called once the command ends or is interrupted.
-  //@Override
-  //public void end(boolean interrupted) {}
+  @Override
+  public void end(boolean interrupted) {
+    wrist.Stop();
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return wrist.AtTarget();
+    //return wrist.AtTarget();
+    return false;
   }
 }

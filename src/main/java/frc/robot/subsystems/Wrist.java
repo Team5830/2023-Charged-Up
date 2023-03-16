@@ -19,16 +19,16 @@ public class Wrist extends SubsystemBase {
     private double kFF;
     public Wrist() {
     try{
-        wristMotorController = new CANSparkMax(DriveConstants.kwristmoter , CANSparkMax.MotorType.kBrushless);
+        wristMotorController = new CANSparkMax(ValueConstants.kwristmoter , CANSparkMax.MotorType.kBrushless);
         wristMotorController.restoreFactoryDefaults();
         wristEncoder = wristMotorController.getEncoder();
-        wristEncoder.setPositionConversionFactor(8/9);
+        wristEncoder.setPositionConversionFactor(80);
         wristEncoder.setPosition(0.0);
-        m_kwristmoterPID.setOutputRange(WristPID.MinOutput, WristPID.MaxOutput);
         wristMotorController.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
         wristMotorController.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);    
         wristMotorController.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, WristPID.ForwardLimit);
         wristMotorController.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, WristPID.ReverseLimit);
+        wristMotorController.setIdleMode(CANSparkMax.IdleMode.kBrake);
         
 
         m_kwristmoterPID = wristMotorController.getPIDController();
@@ -44,8 +44,7 @@ public class Wrist extends SubsystemBase {
         m_kwristmoterPID.setPositionPIDWrappingMaxInput(180);
         m_kwristmoterPID.setPositionPIDWrappingMinInput(-180);
         m_kwristmoterPID.setPositionPIDWrappingEnabled(true);
-        
-        
+                
         }catch (RuntimeException ex) {
             DriverStation.reportError("Error Configuring Drivetrain" + ex.getMessage(), true);
         }
@@ -68,15 +67,29 @@ public class Wrist extends SubsystemBase {
     }
     public boolean AtTarget(){
         double curposition = wristEncoder.getPosition();
+        DriverStation.reportWarning(String.format("Position: %f",curposition),false);
         if ( Math.abs(curposition - wristarget) <=WristPID.Tolerance){
-            wristMotorController.stopMotor();
+            DriverStation.reportWarning("True",false);
             return true;
         }else{
+            DriverStation.reportWarning(String.format("false: %f",Math.abs(curposition - wristarget)),false);
             return false;
         }
     }
     public double Position(){
         return wristEncoder.getPosition();
+    }
+
+    public void Stop(){
+        wristMotorController.set(0);
+    }
+    public void increment(){
+        wristarget = wristarget + 5;
+        m_kwristmoterPID.setReference(wristarget, ControlType.kPosition);
+    }
+    public void decrement(){
+        wristarget = wristarget - 5;
+        m_kwristmoterPID.setReference(wristarget, ControlType.kPosition);
     }
 
     @Override
