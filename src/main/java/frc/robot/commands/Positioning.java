@@ -1,9 +1,12 @@
 package frc.robot.commands;
 
+import java.util.function.BooleanSupplier;
+
 //import edu.wpi.first.wpilibj.DriverStation; Ha Ha Ha, Good Bye Sucker!
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import frc.robot.subsystems.*;
 
 public class Positioning extends SequentialCommandGroup {
@@ -17,7 +20,7 @@ public class Positioning extends SequentialCommandGroup {
         this.m_wrist = wrist;
         this.m_extend = extendarm;
         this.m_drive = drive;
-        addRequirements(m_arm, m_wrist, m_extend, m_drive);
+        addRequirements(m_arm, m_wrist, m_extend);
         if (extensiondistance > 10.0){
             m_drive.SetMaxSpeed(0.2);
         } else {
@@ -28,7 +31,7 @@ public class Positioning extends SequentialCommandGroup {
                 new MoveWrist(wristangle, m_wrist).withTimeout(5),
                 new MoveExtension(-3, extendarm).withTimeout(5),
                 new MoveArm(armangle, m_arm).withTimeout(5),
-                //new WaitCommand(0.5),
+                //new WaitUntilCommand( m_arm::Safe),
                 new MoveExtension(extensiondistance, extendarm).withTimeout(5)
             );
     } else {

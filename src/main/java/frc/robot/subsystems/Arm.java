@@ -78,8 +78,17 @@ public class Arm extends SubsystemBase {
             return false;
         }
     }
+
     public double Position(){
         return armEncoder.getPosition();
+    }
+
+    public boolean Safe(){
+        if (Position()>100){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public void Stop(){
