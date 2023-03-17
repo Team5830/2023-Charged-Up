@@ -177,7 +177,7 @@ public class RobotContainer {
       Driverbutton5.onTrue(new InstantCommand(m_driveTrain::OverrideMax));
       DigitalInput proxsense = new DigitalInput(1);
       
-      new Trigger(proxsense::get).onTrue(new CloseManipulator(m_pneumatics));
+      new Trigger(proxsense::get).onFalse(new CloseManipulator(m_pneumatics));
       //Code to create a trigger that on true does the CloseManipulator
       
 
