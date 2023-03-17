@@ -1,11 +1,10 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj.DriverStation; Ha Ha Ha, Good Bye Sucker!
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import frc.robot.subsystems.*;
 
 public class Positioning extends SequentialCommandGroup {
@@ -19,7 +18,7 @@ public class Positioning extends SequentialCommandGroup {
         this.m_wrist = wrist;
         this.m_extend = extendarm;
         this.m_drive = drive;
-        addRequirements(m_arm, m_wrist, m_extend, m_drive);
+        addRequirements(m_arm, m_wrist, m_extend);
         if (extensiondistance > 10.0){
             m_drive.SetMaxSpeed(0.2);
         } else {

@@ -74,7 +74,7 @@ public class Constants {
         public static final double FF = 0.0;
         public static final double MaxOutput = .4;
         public static final double MinOutput = -.4;
-        public static final float ForwardLimit = 300;
+        public static final float ForwardLimit = 240;
         public static final float ReverseLimit = 0;
         public static final double Tolerance = 5.0;
     }
@@ -97,8 +97,8 @@ public class Constants {
         public static final double FF =0.0;
         public static final double MaxOutput = .7;
         public static final double MinOutput = -.7;
-        public static final float ForwardLimit = 5;
-        public static final float ReverseLimit = -25;
+        public static final float ForwardLimit = 4;
+        public static final float ReverseLimit = -24;
         public static final double Tolerance = 3.0;
     }
     public static final class Position1{ // Retracted
@@ -117,7 +117,7 @@ public class Constants {
         public static final double extensionDistance = 2.0;
     }
     public static final class Position4{ // High node
-        public static final double armAngle = 278.0;
+        public static final double armAngle = 235.0;//278.0
         public static final double wristAngle = 194.0;
         public static final double extensionDistance = 21.0;
     }
