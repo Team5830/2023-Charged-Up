@@ -11,7 +11,7 @@ import frc.robot.Constants.ArmPID;
 
 public class Arm extends SubsystemBase {
     private CANSparkMax armMotorController;
-    private RelativeEncoder armEncoder;
+    public RelativeEncoder armEncoder;
     private SparkMaxPIDController m_karmoterPID;
     private double karget;
     private double P,I,D;
@@ -66,6 +66,7 @@ public class Arm extends SubsystemBase {
     public void move(double degrees) {
         karget = degrees;
         m_karmoterPID.setReference(karget, ControlType.kPosition);
+        DriverStation.reportWarning(String.format("Armmm Position %f",armEncoder.getPosition()),false);
     }
     public boolean AtTarget(){
         double curposition = armEncoder.getPosition();
@@ -80,6 +81,7 @@ public class Arm extends SubsystemBase {
     }
 
     public double Position(){
+        SmartDashboard.putNumber("Armzzz", armEncoder.getPosition());
         return armEncoder.getPosition();
     }
 

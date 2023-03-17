@@ -29,6 +29,7 @@ public class Constants {
        public static final int karmoter = 1;
        public static final int kwristmoter = 6;
        public static final int extemoroller = 7;
+       public static final double width = 27.0;
      }
     
 
@@ -79,7 +80,7 @@ public class Constants {
     }
 
     public static final class WristPID {
-        public static final double P = 0.01; //.009;
+        public static final double P = 0.003; //.009;
         public static final double I = 0.0;    //.000003; 
         public static final double D = 0.03;    //.03;
         public static final double FF = 0;
@@ -102,8 +103,8 @@ public class Constants {
     }
     public static final class Position1{ // Retracted
         public static final double armAngle = 0.0;
-        public static final double wristAngle = 15.0;
-        public static final double extensionDistance = -8.0;
+        public static final double wristAngle = 5.0;
+        public static final double extensionDistance = -4.0;
     }
     public static final class Position2{ // Pickup Position
         public static final double armAngle = 49.1;
