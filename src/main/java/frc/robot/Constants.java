@@ -29,6 +29,7 @@ public class Constants {
        public static final int karmoter = 1;
        public static final int kwristmoter = 6;
        public static final int extemoroller = 7;
+       public static final double width = 27.0;
      }
     
 
