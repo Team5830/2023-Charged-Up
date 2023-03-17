@@ -82,11 +82,11 @@ public class RobotContainer {
     SmartDashboard.putData("Brake Release", new InstantCommand(m_driveTrain::brakerelease));
     SmartDashboard.putData(new InstantCommand(m_arm::Position));
     SmartDashboard.putData("Level", new Level(0, m_driveTrain));
-    SmartDashboard.putData("Position1", new Positioning(m_arm,m_wrist,m_extension, Position1.armAngle, Position1.wristAngle, Position1.extensionDistance, true));
-    SmartDashboard.putData("Position2", new Positioning(m_arm,m_wrist,m_extension, Position2.armAngle, Position2.wristAngle, Position2.extensionDistance,false));
-    SmartDashboard.putData("Position3", new Positioning(m_arm,m_wrist,m_extension, Position3.armAngle, Position3.wristAngle, Position3.extensionDistance,false));
-    SmartDashboard.putData("Position4", new Positioning(m_arm,m_wrist,m_extension, Position4.armAngle, Position4.wristAngle, Position4.extensionDistance,false));
-    SmartDashboard.putData("Position5", new Positioning(m_arm,m_wrist,m_extension, Position5.armAngle, Position5.wristAngle, Position5.extensionDistance,false));
+    SmartDashboard.putData("Position1", new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position1.armAngle, Position1.wristAngle, Position1.extensionDistance, true));
+    SmartDashboard.putData("Position2", new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position2.armAngle, Position2.wristAngle, Position2.extensionDistance,false));
+    SmartDashboard.putData("Position3", new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position3.armAngle, Position3.wristAngle, Position3.extensionDistance,false));
+    SmartDashboard.putData("Position4", new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position4.armAngle, Position4.wristAngle, Position4.extensionDistance,false));
+    SmartDashboard.putData("Position5", new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position5.armAngle, Position5.wristAngle, Position5.extensionDistance,false));
     //SmartDashboard.putData("Move", new MoveDash( m_driveTrain) );
 
     SmartDashboard.putData("Move", new Move(1.0, m_driveTrain) );
@@ -159,15 +159,15 @@ public class RobotContainer {
       Trigger Driverbutton6 = new JoystickButton(rightJoystick, 6);
       Trigger Driverbutton3 = new JoystickButton(rightJoystick, 3);
 
-      button3.onTrue(new Positioning(m_arm,m_wrist,m_extension, Position1.armAngle, Position1.wristAngle, Position1.extensionDistance,true));
-      button4.onTrue(new Positioning(m_arm,m_wrist,m_extension, Position2.armAngle, Position2.wristAngle, Position2.extensionDistance,false));
-      button1.onTrue(new Positioning(m_arm,m_wrist,m_extension, Position3.armAngle, Position3.wristAngle, Position3.extensionDistance,false));
-      button2.onTrue(new Positioning(m_arm,m_wrist,m_extension, Position4.armAngle, Position4.wristAngle, Position4.extensionDistance,false));
-      button5.onTrue(new Positioning(m_arm,m_wrist,m_extension, Position5.armAngle, Position5.wristAngle, Position5.extensionDistance,false));
+      button3.onTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position1.armAngle, Position1.wristAngle, Position1.extensionDistance,true));
+      button4.onTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position2.armAngle, Position2.wristAngle, Position2.extensionDistance,false));
+      button1.onTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position3.armAngle, Position3.wristAngle, Position3.extensionDistance,false));
+      button2.onTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position4.armAngle, Position4.wristAngle, Position4.extensionDistance,false));
+      button5.onTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position5.armAngle, Position5.wristAngle, Position5.extensionDistance,false));
       // button6.whileTrue(new InstantCommand( m_wrist::decrement).repeatedly());
       // button8.whileTrue(new InstantCommand( m_wrist::increment).repeatedly());
       //change button 7
-      button7.whileTrue(new Positioning(m_arm,m_wrist,m_extension, Position6.armAngle, Position6.wristAngle, Position6.extensionDistance,false));
+      button7.whileTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position6.armAngle, Position6.wristAngle, Position6.extensionDistance,false));
       Driverbutton1.whileTrue(new ConditionalCommand(new CloseManipulator(m_pneumatics), new OpenManipulator(m_pneumatics), m_pneumatics::manipulator_open));
       xroller.povDown().and(button6).whileTrue( new InstantCommand( m_wrist::increment).repeatedly());
       xroller.povDown().and(button8).whileTrue(new InstantCommand( m_wrist::decrement).repeatedly());
@@ -176,7 +176,7 @@ public class RobotContainer {
       xroller.povLeft().and(button6).whileTrue(new InstantCommand( m_arm::increment).repeatedly());
       xroller.povLeft().and(button8).whileTrue(new InstantCommand( m_arm::decrement).repeatedly());
       Driverbutton5.onTrue(new InstantCommand(m_driveTrain::OverrideMax));
-      Driverbutton4.onTrue(new Balance(m_driveTrain));
+      Driverbutton4.onTrue(new Balance(m_driveTrain).repeatedly());
       Driverbutton6.onTrue(new Brake(m_driveTrain));
       //Driverbutton3.onTrue(new Level(0, m_driveTrain));
     
@@ -205,11 +205,11 @@ public Joystick getRightJoystick() {
     // The selected command will be run in autonomous
     //return m_chooser.getSelected();
     return new SequentialCommandGroup(
-      new Positioning(m_arm,m_wrist,m_extension, Position4.armAngle, Position4.wristAngle, Position4.extensionDistance,false),
+      new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position4.armAngle, Position4.wristAngle, Position4.extensionDistance,false),
       new OpenManipulator( m_pneumatics ),
       new WaitCommand(0.75),
       new CloseManipulator( m_pneumatics ),
-      new Positioning(m_arm,m_wrist,m_extension, Position1.armAngle, Position1.wristAngle, Position1.extensionDistance,true),
+      new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position1.armAngle, Position1.wristAngle, Position1.extensionDistance,true),
       new Move(-4.0, m_driveTrain),
       new InstantCommand(m_driveTrain::OverrideMax)
     );

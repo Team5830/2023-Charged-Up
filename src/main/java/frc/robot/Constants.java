@@ -64,6 +64,8 @@ public class Constants {
         public static final double rf = 0.0;
         public static final double rMaxAlignSpeed = 0.5;
         public static final double rAlignTolerance = 0.2;
+        public static final double HighSpeed = 0.9;
+        public static final double LowSpeed = 0.2;
     }
 
     public static final class ArmPID {

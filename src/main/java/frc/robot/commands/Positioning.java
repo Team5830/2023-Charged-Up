@@ -8,7 +8,7 @@ public class Positioning extends SequentialCommandGroup {
     private Wrist m_wrist;
     private ExtendArm m_extend;
 
-    public Positioning(Arm arm, Wrist wrist, ExtendArm extendarm, double armangle, double wristangle, double extensiondistance, boolean wristFirst) {
+    public Positioning(Arm arm, Wrist wrist, ExtendArm extendarm, DriveTrain m_driveTrain, double armangle, double wristangle, double extensiondistance, boolean wristFirst) {
         this.m_arm =  arm;
         this.m_wrist = wrist;
         this.m_extend = extendarm;
@@ -16,20 +16,20 @@ public class Positioning extends SequentialCommandGroup {
         
         if(wristFirst) {
             addCommands(
-                new MoveExtension(-3, extendarm).withTimeout(1),
+                new MoveExtension(-3, extendarm, m_driveTrain).withTimeout(1),
                 new MoveWrist(wristangle, m_wrist).withTimeout(1),  
                 new MoveArm(armangle, m_arm).withTimeout(1),  
                     //new WaitCommand(0.5),
-                new MoveExtension(extensiondistance, extendarm).withTimeout(1)
+                new MoveExtension(extensiondistance, extendarm, m_driveTrain).withTimeout(1)
             );
 
         } else {
             addCommands(
-                new MoveExtension(-3, extendarm).withTimeout(1),
+                new MoveExtension(-3, extendarm, m_driveTrain).withTimeout(1),
                 new MoveArm(armangle, m_arm).withTimeout(1),
                 new MoveWrist(wristangle, m_wrist).withTimeout(1),    
                     //new WaitCommand(0.5),
-                new MoveExtension(extensiondistance, extendarm).withTimeout(1)
+                new MoveExtension(extensiondistance, extendarm, m_driveTrain).withTimeout(1)
             );
         }
     }

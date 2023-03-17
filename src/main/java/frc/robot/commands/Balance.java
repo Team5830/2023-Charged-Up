@@ -5,7 +5,7 @@ import frc.robot.subsystems.*;
 
 public class Balance extends CommandBase {
     DriveTrain drivetrain;
-    double climbspeed = 0.1;
+    double climbspeed = 0.3;
     public Balance(DriveTrain m_DriveTrain){
         drivetrain = m_DriveTrain;
         addRequirements(drivetrain);
@@ -13,7 +13,7 @@ public class Balance extends CommandBase {
     @Override
     public void execute() {
         if (drivetrain.getPitch()>-12 && drivetrain.getAngle()<12){
-            drivetrain.TankDrive(0, 0);
+            drivetrain.brake();
         }
         if(drivetrain.getPitch()<-12){
             drivetrain.TankDrive(-climbspeed, -climbspeed);
