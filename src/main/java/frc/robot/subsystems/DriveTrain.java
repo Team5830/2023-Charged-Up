@@ -62,7 +62,6 @@ public class DriveTrain extends SubsystemBase {
   private SparkMaxPIDController m_drivetrainPIDcontright;
   private double lP, lI, lD, rP, rI, rD;
   private double maxspeed;
-  private boolean extended;
   private DifferentialDriveKinematics kinematics;
   private DifferentialDriveOdometry odometry;
   private Field2d m_field = new Field2d();
