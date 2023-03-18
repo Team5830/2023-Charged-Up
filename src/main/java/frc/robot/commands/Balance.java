@@ -22,4 +22,13 @@ public class Balance extends CommandBase {
             drivetrain.TankDrive(climbspeed, climbspeed);
         }
     }
+    @Override
+    public boolean isFinished() {
+        if(Math.abs(drivetrain.getPitch())<12.0) {
+            return true;
+                }
+        else {
+            return false;
+        }
+    }
 }
