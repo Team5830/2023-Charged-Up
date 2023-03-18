@@ -25,20 +25,20 @@ public class Positioning extends SequentialCommandGroup {
         }
         if(wristFirst) {
             addCommands(
-                new MoveExtension(-3, extendarm).withTimeout(1),
-                new MoveWrist(wristangle, m_wrist).withTimeout(1),  
-                new MoveArm(armangle, m_arm).withTimeout(1),  
+                new MoveExtension(-3, extendarm).withTimeout(5),
+                new MoveWrist(wristangle, m_wrist).withTimeout(5),  
+                new MoveArm(armangle, m_arm).withTimeout(5),  
                     //new WaitCommand(0.5),
-                new MoveExtension(extensiondistance, extendarm).withTimeout(1)
+                new MoveExtension(extensiondistance, extendarm).withTimeout(5)
             );
 
         } else {
             addCommands(
-                new MoveExtension(-3, extendarm).withTimeout(1),
-                new MoveArm(armangle, m_arm).withTimeout(1),
-                new MoveWrist(wristangle, m_wrist).withTimeout(1),    
+                new MoveExtension(-3, extendarm).withTimeout(5),
+                new MoveArm(armangle, m_arm).withTimeout(5),
+                new MoveWrist(wristangle, m_wrist).withTimeout(5),    
                     //new WaitCommand(0.5),
-                new MoveExtension(extensiondistance, extendarm).withTimeout(1)
+                new MoveExtension(extensiondistance, extendarm).withTimeout(5)
             );
         }
         /* 

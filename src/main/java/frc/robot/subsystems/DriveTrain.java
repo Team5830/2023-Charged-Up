@@ -65,6 +65,7 @@ public class DriveTrain extends SubsystemBase {
   private DifferentialDriveKinematics kinematics;
   private DifferentialDriveOdometry odometry;
   private Field2d m_field = new Field2d();
+  public boolean brakeon = false;
 
 
   /**
@@ -237,11 +238,16 @@ public class DriveTrain extends SubsystemBase {
     double leftarget = leftLeadEncoder.getPosition();
     m_drivetrainPIDcontleft.setReference(leftarget, ControlType.kPosition);
     m_drivetrainPIDcontright.setReference(rightarget, ControlType.kPosition);
+    brakeon = true;
   }
 
   public void brakerelease() {
     rightLeadMotorController.stopMotor();
     leftLeadMotorController.stopMotor();
+    brakeon = false;
+  }
+  public boolean brake_on(){
+    return brakeon;
   }
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
