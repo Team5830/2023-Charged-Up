@@ -40,14 +40,13 @@ public class AutonomousCommand2 extends SequentialCommandGroup {
             Pneumatics m_pneumatics) {
         addCommands(
                 new Positioning(m_arm, m_wrist, m_extension, m_driveTrain, Position4.armAngle, Position4.wristAngle,
-                        Position4.extensionDistance, false),
+                        Position4.extensionDistance, true),
                 new OpenManipulator(m_pneumatics),
                 new WaitCommand(0.75),
                 new CloseManipulator(m_pneumatics),
                 new Positioning(m_arm, m_wrist, m_extension, m_driveTrain, Position1.armAngle, Position1.wristAngle,
                         Position1.extensionDistance, true),
-                new Move(-2.0, m_driveTrain),
-                new InstantCommand(m_driveTrain::OverrideMax),
+                new Move(-2.5, m_driveTrain),
                 new Balance(m_driveTrain));
     }
 

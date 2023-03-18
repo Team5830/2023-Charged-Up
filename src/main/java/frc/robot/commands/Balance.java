@@ -5,7 +5,7 @@ import frc.robot.subsystems.*;
 
 public class Balance extends CommandBase {
     DriveTrain drivetrain;
-    double climbspeed = 0.3;
+    double climbspeed = 0.4;
     public Balance(DriveTrain m_DriveTrain){
         drivetrain = m_DriveTrain;
         addRequirements(drivetrain);
