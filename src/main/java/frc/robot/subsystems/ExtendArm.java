@@ -65,6 +65,12 @@ public class ExtendArm extends SubsystemBase{
     }
 
     public double getPosition(){
+        double ret = -extencoder.getPosition();
+        if (ret > 10.0){
+            extended = true;
+        } else {
+            extended = false;
+        }
         return -extencoder.getPosition();
     }
 
@@ -98,15 +104,9 @@ public class ExtendArm extends SubsystemBase{
     public void periodic(){
         
         SmartDashboard.putNumber("Extension Position", getPosition());
+        SmartDashboard.putBoolean("Extended", extended);
         /* 
         SmartDashboard.getNumber("Extension Target", extensionTarget);
-        if (getPosition()>10.0){
-            extended = true;
-          }
-          else{
-            extended = false;
-          }
-        SmartDashboard.putBoolean("Extended", extended);
         */
     }
 }

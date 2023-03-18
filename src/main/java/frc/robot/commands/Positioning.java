@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import frc.robot.subsystems.*;
+import frc.robot.Constants.MovePID;
 
 public class Positioning extends SequentialCommandGroup {
     private Arm m_arm;
@@ -20,9 +21,9 @@ public class Positioning extends SequentialCommandGroup {
         this.m_drive = drive;
         addRequirements(m_arm, m_wrist, m_extend);
         if (extensiondistance > 10.0){
-            m_drive.SetMaxSpeed(0.2);
+            m_drive.SetMaxSpeed(MovePID.LowSpeed);
         } else {
-            m_drive.SetMaxSpeed(0.9);
+            m_drive.SetMaxSpeed(MovePID.HighSpeed);
         }
         if(wristFirst) {
             addCommands(

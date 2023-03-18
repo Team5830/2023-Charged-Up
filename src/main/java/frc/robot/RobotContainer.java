@@ -26,7 +26,6 @@ import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import edu.wpi.first.wpilibj.AnalogTrigger;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 
@@ -156,8 +155,10 @@ public class RobotContainer {
       Trigger button7 = xroller.button(7);
       Trigger button8 = xroller.button(8);
       //Driver right Joystick max override
-      Trigger Driverbutton5 = new JoystickButton(rightJoystick, 5);
       Trigger Driverbutton1 = new JoystickButton(rightJoystick, 1);
+      //Trigger Driverbutton4 = new JoystickButton(rightJoystick, 4);
+      Trigger Driverbutton5 = new JoystickButton(rightJoystick, 5);
+      Trigger Driverbutton6 = new JoystickButton(rightJoystick, 6);
 
       button3.onTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position1.armAngle, Position1.wristAngle, Position1.extensionDistance,true));
       button4.onTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position2.armAngle, Position2.wristAngle, Position2.extensionDistance,false));
@@ -176,6 +177,9 @@ public class RobotContainer {
       xroller.povLeft().and(button6).whileTrue(new InstantCommand( m_arm::increment).repeatedly());
       xroller.povLeft().and(button8).whileTrue(new InstantCommand( m_arm::decrement).repeatedly());
       Driverbutton5.onTrue(new InstantCommand(m_driveTrain::OverrideMax));
+
+      //Driverbutton4.onTrue(new Balance(m_driveTrain).repeatedly());
+      Driverbutton6.onTrue(new Brake(m_driveTrain));
       DigitalInput proxsense = new DigitalInput(1);
       
       new Trigger(proxsense::get).onFalse(new CloseManipulator(m_pneumatics));
