@@ -76,7 +76,7 @@ public class Constants {
         public static final double FF = 0.0;
         public static final double MaxOutput = .4;
         public static final double MinOutput = -.4;
-        public static final float ForwardLimit = 240;
+        public static final float ForwardLimit = 300;
         public static final float ReverseLimit = 0;
         public static final double Tolerance = 5.0;
     }
@@ -119,14 +119,14 @@ public class Constants {
         public static final double extensionDistance = 2.0;
     }
     public static final class Position4{ // High node
-        public static final double armAngle = 235.0;//278.0
+        public static final double armAngle = 278.0;//278.0
         public static final double wristAngle = 194.0;
         public static final double extensionDistance = 21.0;
     }
     public static final class Position5{ // Human player station pickup
-        public static final double armAngle = 221.0;
-        public static final double wristAngle = 189.0;
-        public static final double extensionDistance = 2.3;
+        public static final double armAngle = 226.0;
+        public static final double wristAngle = 198.0;
+        public static final double extensionDistance = 2.0;
     }
 
     public static final class Position6{ // cone on the ground
