@@ -13,6 +13,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -64,6 +65,8 @@ public class DriveTrain extends SubsystemBase {
   private boolean extended;
   private DifferentialDriveKinematics kinematics;
   private DifferentialDriveOdometry odometry;
+  private Field2d m_field = new Field2d();
+
 
   /**
   *
@@ -122,7 +125,8 @@ public class DriveTrain extends SubsystemBase {
       m_drivetrainPIDcontright.setP(MovePID.rP);
       m_drivetrainPIDcontright.setI(MovePID.rI);
       m_drivetrainPIDcontright.setD(MovePID.rD);
-
+      SmartDashboard.putData("Field", m_field);
+      
     } catch (RuntimeException ex) {
       DriverStation.reportError("Error Configuring Drivetrain" + ex.getMessage(), true);
     }
@@ -222,7 +226,7 @@ public class DriveTrain extends SubsystemBase {
     m_drive.feed();
 
     odometry.update(ahrs.getRotation2d(), leftLeadEncoder.getPosition(), rightLeadEncoder.getPosition());
-
+    m_field.setRobotPose(odometry.getPoseMeters());
     SmartDashboard.putNumber("Distance", getDistance());
     SmartDashboard.putNumber("Pitch", getPitch());
     SmartDashboard.putNumber("Angle", ahrs.getAngle());
