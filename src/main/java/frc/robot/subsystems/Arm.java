@@ -86,7 +86,7 @@ public class Arm extends SubsystemBase {
     }
 
     public boolean Safe(){
-        if (Position()>100){
+        if (Position()>100 || AtTarget()){
             return true;
         }else{
             return false;

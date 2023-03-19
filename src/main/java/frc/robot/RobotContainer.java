@@ -182,8 +182,8 @@ public class RobotContainer {
       Driverbutton6.onTrue(new Brake(m_driveTrain));
       DigitalInput proxsense = new DigitalInput(1);
       
-      new Trigger(proxsense::get).onFalse(new CloseManipulator(m_pneumatics));
-      //Code to create a trigger that on true does the CloseManipulator
+      new Trigger(proxsense::get).onFalse(new CloseManipulator(m_pneumatics)).and(m_pneumatics::manipulator_open);
+      //Code to create a trigger that on falsee does the CloseManipulator
       
 
     

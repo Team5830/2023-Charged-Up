@@ -1,13 +1,14 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import frc.robot.subsystems.*;
 import frc.robot.Constants.MovePID;
 
-
-public class Positioning extends SequentialCommandGroup {
+public class Positioning extends SequentialCommandGroup{
     private Arm m_arm;
     private Wrist m_wrist;
     private ExtendArm m_extend;
@@ -18,7 +19,6 @@ public class Positioning extends SequentialCommandGroup {
         this.m_wrist = wrist;
         this.m_extend = extendarm;
         this.m_drive = drive;
-        addRequirements(m_arm, m_wrist, m_extend);
         if (extensiondistance > 10.0){
             m_drive.SetMaxSpeed(MovePID.LowSpeed);
         } else {
@@ -26,20 +26,34 @@ public class Positioning extends SequentialCommandGroup {
         }
         if(wristFirst) {
             addCommands(
-                new MoveExtension(-3, extendarm).withTimeout(1),
-                new MoveWrist(wristangle, m_wrist).withTimeout(1),  
-                new MoveArm(armangle, m_arm).withTimeout(1),  
-                    //new WaitCommand(0.5),
-                new MoveExtension(extensiondistance, extendarm).withTimeout(1)
+                Commands.parallel(
+                    new TimerCommand(),
+                    new MoveWrist(wristangle, m_wrist).withTimeout(5.0),
+                    Commands.sequence(
+                        new WaitUntilCommand(m_wrist::Safe),
+                        new MoveExtension(extensiondistance, m_extend).withTimeout(5.0)
+                    ),
+                    Commands.sequence(
+                        new WaitUntilCommand(m_wrist::Safe),
+                        new MoveArm(armangle, m_arm).withTimeout(5.0)
+                    )
+                )
             );
-
         } else {
             addCommands(
-                new MoveExtension(-3, extendarm).withTimeout(1),
-                new MoveArm(armangle, m_arm).withTimeout(1),
-                new MoveWrist(wristangle, m_wrist).withTimeout(1),    
-                    //new WaitCommand(0.5),
-                new MoveExtension(extensiondistance, extendarm).withTimeout(1)
+                new MoveExtension(-3, m_extend).withTimeout(5.0),
+                Commands.parallel(
+                    new TimerCommand(),
+                    new MoveArm(armangle, m_arm).withTimeout(5.0),
+                    Commands.sequence(
+                        new WaitUntilCommand(m_arm::Safe),
+                        new MoveExtension(extensiondistance, m_extend).withTimeout(5.0)
+                    ),
+                    Commands.sequence(
+                        new WaitUntilCommand(m_arm::Safe),
+                        new MoveWrist(wristangle, m_wrist).withTimeout(5.0) 
+                    )
+                )
             );
         }
         /* 

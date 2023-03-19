@@ -92,6 +92,13 @@ public class Wrist extends SubsystemBase {
         wristarget = wristarget - 2;
         m_kwristmoterPID.setReference(wristarget, ControlType.kPosition);
     }
+    public boolean Safe(){
+        if (Position()<90 || AtTarget() ){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     @Override
     public void periodic(){
