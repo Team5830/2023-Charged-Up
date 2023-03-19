@@ -62,7 +62,7 @@ public class DriveTrain extends SubsystemBase {
   private SparkMaxPIDController m_drivetrainPIDcontright;
   private double lP, lI, lD, rP, rI, rD;
   private double maxspeed;
-  private DifferentialDriveKinematics kinematics;
+  public DifferentialDriveKinematics kinematics;
   private DifferentialDriveOdometry odometry;
   private Field2d m_field = new Field2d();
   public boolean brakeon = false;
@@ -219,6 +219,12 @@ public class DriveTrain extends SubsystemBase {
   public void resetEncoders() {
     leftLeadEncoder.setPosition(0);
     rightLeadEncoder.setPosition(0);
+  }
+
+  public void resetOdometry(Pose2d pose) {
+    resetEncoders();
+    odometry.resetPosition(
+      ahrs.getRotation2d(), leftLeadEncoder.getPosition(), rightLeadEncoder.getPosition(), pose);
   }
 
   @Override
