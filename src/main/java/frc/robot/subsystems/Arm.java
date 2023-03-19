@@ -99,12 +99,16 @@ public class Arm extends SubsystemBase {
         SmartDashboard.putNumber("ArmPosition", armEncoder.getPosition());
     }
     public void increment(){
-        karget = karget + 3;
-        m_karmoterPID.setReference(karget, ControlType.kPosition);
+        if (karget + 3 <= ArmPID.ForwardLimit){
+            karget = karget + 3;
+            m_karmoterPID.setReference(karget, ControlType.kPosition);
+        }
     }
     public void decrement(){
-        karget = karget - 3;
-        m_karmoterPID.setReference(karget, ControlType.kPosition);
+        if (karget - 3 >= ArmPID.ReverseLimit){
+            karget = karget - 3;
+            m_karmoterPID.setReference(karget, ControlType.kPosition);
+        }
     }
 
     @Override

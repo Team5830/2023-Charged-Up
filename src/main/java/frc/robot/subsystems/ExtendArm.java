@@ -91,13 +91,17 @@ public class ExtendArm extends SubsystemBase{
     }
 
     public void increment(){
-        extensionTarget = extensionTarget + 3.0;
-        extemPIDer.setReference(extensionTarget, ControlType.kPosition);
+        if (extensionTarget + 3.0 <= ExtendPID.ForwardLimit){
+            extensionTarget = extensionTarget + 3.0;
+            extemPIDer.setReference(extensionTarget, ControlType.kPosition);
+        }
     }
 
     public void decrement(){
-        extensionTarget = extensionTarget - 3.0;
-        extemPIDer.setReference(extensionTarget, ControlType.kPosition);
+        if (extensionTarget - 3.0 >= ExtendPID.ReverseLimit){
+            extensionTarget = extensionTarget - 3.0;
+            extemPIDer.setReference(extensionTarget, ControlType.kPosition);
+        }
     }
 
     @Override
