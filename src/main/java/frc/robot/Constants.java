@@ -117,14 +117,14 @@ public class Constants {
         public static final double FF =0.0;
         public static final double MaxOutput = .7;
         public static final double MinOutput = -.7;
-        public static final float ForwardLimit = 4;
+        public static final float ForwardLimit = 5;
         public static final float ReverseLimit = -24;
         public static final double Tolerance = 3.0;
     }
     public static final class Position1{ // Retracted
         public static final double armAngle = 0.0;
         public static final double wristAngle = 5.0;
-        public static final double extensionDistance = -4.0;
+        public static final double extensionDistance = -5.0;
     }
     public static final class Position2{ // Pickup Position
         public static final double armAngle = 49.1;

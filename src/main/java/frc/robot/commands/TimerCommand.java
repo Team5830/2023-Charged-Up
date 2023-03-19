@@ -2,7 +2,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 public class TimerCommand extends CommandBase{
-    private Timer timer;
+    private Timer timer = new Timer();
     public TimerCommand(){
 
     }

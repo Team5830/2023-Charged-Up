@@ -161,18 +161,18 @@ public class RobotContainer {
       Trigger Driverbutton5 = new JoystickButton(rightJoystick, 5);
       Trigger Driverbutton6 = new JoystickButton(rightJoystick, 6);
 
-      button3.onTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position1.armAngle, Position1.wristAngle, Position1.extensionDistance,true).alongWith(new TimerCommand()));
-      button4.onTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position2.armAngle, Position2.wristAngle, Position2.extensionDistance,false).alongWith(new TimerCommand()));
-      button1.onTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position3.armAngle, Position3.wristAngle, Position3.extensionDistance,false).alongWith(new TimerCommand()));
-      button2.onTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position4.armAngle, Position4.wristAngle, Position4.extensionDistance,false).alongWith(new TimerCommand()));
-      button5.onTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position5.armAngle, Position5.wristAngle, Position5.extensionDistance,false).alongWith(new TimerCommand()));
+      button3.onTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position1.armAngle, Position1.wristAngle, Position1.extensionDistance,true));
+      button4.onTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position2.armAngle, Position2.wristAngle, Position2.extensionDistance,false));
+      button1.onTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position3.armAngle, Position3.wristAngle, Position3.extensionDistance,false));
+      button2.onTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position4.armAngle, Position4.wristAngle, Position4.extensionDistance,false));
+      button5.onTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position5.armAngle, Position5.wristAngle, Position5.extensionDistance,false));
       // button6.whileTrue(new InstantCommand( m_wrist::decrement).repeatedly());
       // button8.whileTrue(new InstantCommand( m_wrist::increment).repeatedly());
       //change button 7
       button7.whileTrue(new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position6.armAngle, Position6.wristAngle, Position6.extensionDistance,false));
       Driverbutton1.whileTrue(new ConditionalCommand(new CloseManipulator(m_pneumatics), new OpenManipulator(m_pneumatics), m_pneumatics::manipulator_open));
-      xroller.povDown().and(button6).whileTrue( new InstantCommand( m_wrist::increment).repeatedly());
-      xroller.povDown().and(button8).whileTrue(new InstantCommand( m_wrist::decrement).repeatedly());
+      xroller.povDown().and(button6).whileTrue( new InstantCommand( m_wrist::decrement).repeatedly());
+      xroller.povDown().and(button8).whileTrue(new InstantCommand( m_wrist::increment).repeatedly());
       xroller.povRight().and(button6).whileTrue( new InstantCommand( m_extension::increment).repeatedly());
       xroller.povRight().and(button8).whileTrue(new InstantCommand( m_extension::decrement).repeatedly());
       xroller.povLeft().and(button6).whileTrue(new InstantCommand( m_arm::increment).repeatedly());

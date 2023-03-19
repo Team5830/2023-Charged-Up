@@ -61,6 +61,7 @@ private DoubleSolenoid doubleSolenoid;
     @Override
     public void periodic() {
         SmartDashboard.putNumber("Pressure", getPressure());
+        SmartDashboard.putBoolean("Manipulator", manipulator_open);
     }
 
     // @Override
