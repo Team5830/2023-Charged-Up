@@ -88,7 +88,7 @@ public class RobotContainer {
     SmartDashboard.putData("Position3", new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position3.armAngle, Position3.wristAngle, Position3.extensionDistance,false));
     SmartDashboard.putData("Position4", new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position4.armAngle, Position4.wristAngle, Position4.extensionDistance,false));
     SmartDashboard.putData("Position5", new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position5.armAngle, Position5.wristAngle, Position5.extensionDistance,false));
-    //SmartDashboard.putData("Move", new MoveDash( m_driveTrain) );
+    SmartDashboard.putData("Position6", new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position6.armAngle, Position6.wristAngle, Position6.extensionDistance,false));
 
     SmartDashboard.putData("Move", new Move(1.0, m_driveTrain) );
     SmartDashboard.putData("Turn", new TurnDash( m_driveTrain) );
