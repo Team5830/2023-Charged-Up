@@ -2,6 +2,8 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
@@ -14,16 +16,20 @@ public class Positioning extends SequentialCommandGroup{
     private ExtendArm m_extend;
     private DriveTrain m_drive;
     
+    private boolean wristPosition = false;
+
     public Positioning(Arm arm, Wrist wrist, ExtendArm extendarm, DriveTrain drive,  double armangle, double wristangle, double extensiondistance, boolean wristFirst) {
         this.m_arm =  arm;
         this.m_wrist = wrist;
         this.m_extend = extendarm;
         this.m_drive = drive;
         if (extensiondistance > 10.0){
+        addRequirements(m_arm, m_wrist, m_extend);
+        /*if (extensiondistance > 10.0){
             m_drive.SetMaxSpeed(MovePID.LowSpeed);
         } else {
             m_drive.SetMaxSpeed(MovePID.HighSpeed);
-        }
+        }*/
         if(wristFirst) {
             addCommands(
                 Commands.parallel(
@@ -56,6 +62,7 @@ public class Positioning extends SequentialCommandGroup{
                 )
             );
         }
+        
         /* 
         if (m_extend.extended){
             addCommands(
