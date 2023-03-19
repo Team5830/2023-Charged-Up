@@ -15,8 +15,6 @@ public class Positioning extends SequentialCommandGroup{
     private Wrist m_wrist;
     private ExtendArm m_extend;
     private DriveTrain m_drive;
-    
-    private boolean wristPosition = false;
 
     public Positioning(Arm arm, Wrist wrist, ExtendArm extendarm, DriveTrain drive,  double armangle, double wristangle, double extensiondistance, boolean wristFirst) {
         this.m_arm =  arm;
@@ -24,12 +22,10 @@ public class Positioning extends SequentialCommandGroup{
         this.m_extend = extendarm;
         this.m_drive = drive;
         if (extensiondistance > 10.0){
-        addRequirements(m_arm, m_wrist, m_extend);
-        /*if (extensiondistance > 10.0){
             m_drive.SetMaxSpeed(MovePID.LowSpeed);
         } else {
             m_drive.SetMaxSpeed(MovePID.HighSpeed);
-        }*/
+        }
         if(wristFirst) {
             addCommands(
                 Commands.parallel(
