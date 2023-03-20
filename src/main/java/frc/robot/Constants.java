@@ -84,13 +84,13 @@ public class Constants {
         public static final double rMaxAlignSpeed = 0.5;
         public static final double rAlignTolerance = 0.2;
         public static final double HighSpeed = 0.9;
-        public static final double LowSpeed = 0.2;
+        public static final double LowSpeed = 0.3;
     }
 
     public static final class ArmPID {
-        public static final double P = 0.005;
+        public static final double P = 0.008;
         public static final double I = 0.000001;
-        public static final double D = 0.001;
+        public static final double D = 0.005;
         public static final double FF = 0.0;
         public static final double MaxOutput = .4;
         public static final double MinOutput = -.4;
@@ -100,9 +100,9 @@ public class Constants {
     }
 
     public static final class WristPID {
-        public static final double P = 0.003; //.009;
+        public static final double P = 0.007; //.009;
         public static final double I = 0.0;    //.000003; 
-        public static final double D = 0.03;    //.03;
+        public static final double D = 0.05;    //.03;
         public static final double FF = 0;
         public static final double MaxOutput = .7;
         public static final double MinOutput = -.7;

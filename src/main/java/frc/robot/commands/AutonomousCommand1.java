@@ -39,8 +39,8 @@ public class AutonomousCommand1 extends SequentialCommandGroup {
     public AutonomousCommand1(Arm m_arm, Wrist m_wrist, ExtendArm m_extension, DriveTrain m_driveTrain,
             Pneumatics m_pneumatics) {
         addCommands(
-                new Positioning(m_arm, m_wrist, m_extension, m_driveTrain, Position4.armAngle, Position4.wristAngle,
-                        Position4.extensionDistance, false),
+                new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position1.armAngle, Position1.wristAngle, Position1.extensionDistance,false),
+                new Positioning(m_arm,m_wrist,m_extension, m_driveTrain, Position4.armAngle, Position4.wristAngle, Position4.extensionDistance,false),
                 new OpenManipulator(m_pneumatics),
                 new WaitCommand(0.75),
                 new CloseManipulator(m_pneumatics),
