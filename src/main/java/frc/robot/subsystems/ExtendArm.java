@@ -65,6 +65,12 @@ public class ExtendArm extends SubsystemBase{
     }
 
     public double getPosition(){
+        double ret = -extencoder.getPosition();
+        if (ret > 10.0){
+            extended = true;
+        } else {
+            extended = false;
+        }
         return -extencoder.getPosition();
     }
 
@@ -85,28 +91,26 @@ public class ExtendArm extends SubsystemBase{
     }
 
     public void increment(){
-        extensionTarget = extensionTarget + 3.0;
-        extemPIDer.setReference(extensionTarget, ControlType.kPosition);
+        if (extensionTarget + 3.0 <= ExtendPID.ForwardLimit){
+            extensionTarget = extensionTarget + 3.0;
+            extemPIDer.setReference(extensionTarget, ControlType.kPosition);
+        }
     }
 
     public void decrement(){
-        extensionTarget = extensionTarget - 3.0;
-        extemPIDer.setReference(extensionTarget, ControlType.kPosition);
+        if (extensionTarget - 3.0 >= ExtendPID.ReverseLimit){
+            extensionTarget = extensionTarget - 3.0;
+            extemPIDer.setReference(extensionTarget, ControlType.kPosition);
+        }
     }
 
     @Override
     public void periodic(){
         
         SmartDashboard.putNumber("Extension Position", getPosition());
+        SmartDashboard.putBoolean("Extended", extended);
         /* 
         SmartDashboard.getNumber("Extension Target", extensionTarget);
-        if (getPosition()>10.0){
-            extended = true;
-          }
-          else{
-            extended = false;
-          }
-        SmartDashboard.putBoolean("Extended", extended);
         */
     }
 }

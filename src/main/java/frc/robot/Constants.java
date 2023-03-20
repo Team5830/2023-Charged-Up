@@ -50,7 +50,25 @@ public class Constants {
         public static final double Tolerance = 2.0; // Measured in degrees
         public static final double TurnRateTolerance = 10; //Degrees per second
     }
-
+    public static final class DriveConstants {
+    
+        // These are example values only - DO NOT USE THESE FOR YOUR OWN ROBOT!
+        // These characterization values MUST be determined either experimentally or theoretically
+        // for *your* robot's drive.
+        // The Robot Characterization Toolsuite provides a convenient tool for obtaining these
+        // values for your robot.
+        public static final double ksVolts = 0.22;
+        public static final double kvVoltSecondsPerMeter = 1.98;
+        public static final double kaVoltSecondsSquaredPerMeter = 0.2;
+    
+        // Example value only - as above, this must be tuned for your drive!
+        public static final double kPDriveVel = 8.5;
+        public static final double kMaxSpeedMetersPerSecond = 3.0;
+        public static final double kMaxAccelerationMetersPerSecondSquared = 1.0;
+        // Reasonable baseline values for a RAMSETE follower in units of meters and seconds
+        public static final double kRamseteB = 2;
+        public static final double kRamseteZeta = 0.7;
+      }
 
     public static final class MovePID {
         public static final double lP = 1.0;
@@ -65,6 +83,8 @@ public class Constants {
         public static final double rf = 0.0;
         public static final double rMaxAlignSpeed = 0.5;
         public static final double rAlignTolerance = 0.2;
+        public static final double HighSpeed = 0.9;
+        public static final double LowSpeed = 0.2;
     }
 
     public static final class ArmPID {
@@ -74,7 +94,7 @@ public class Constants {
         public static final double FF = 0.0;
         public static final double MaxOutput = .4;
         public static final double MinOutput = -.4;
-        public static final float ForwardLimit = 240;
+        public static final float ForwardLimit = 300;
         public static final float ReverseLimit = 0;
         public static final double Tolerance = 5.0;
     }
@@ -97,14 +117,14 @@ public class Constants {
         public static final double FF =0.0;
         public static final double MaxOutput = .7;
         public static final double MinOutput = -.7;
-        public static final float ForwardLimit = 4;
+        public static final float ForwardLimit = 5;
         public static final float ReverseLimit = -24;
         public static final double Tolerance = 3.0;
     }
     public static final class Position1{ // Retracted
         public static final double armAngle = 0.0;
         public static final double wristAngle = 5.0;
-        public static final double extensionDistance = -4.0;
+        public static final double extensionDistance = -5.0;
     }
     public static final class Position2{ // Pickup Position
         public static final double armAngle = 49.1;
@@ -117,14 +137,14 @@ public class Constants {
         public static final double extensionDistance = 2.0;
     }
     public static final class Position4{ // High node
-        public static final double armAngle = 235.0;//278.0
+        public static final double armAngle = 278.0;//278.0
         public static final double wristAngle = 194.0;
         public static final double extensionDistance = 21.0;
     }
     public static final class Position5{ // Human player station pickup
-        public static final double armAngle = 221.0;
-        public static final double wristAngle = 189.0;
-        public static final double extensionDistance = 2.3;
+        public static final double armAngle = 226.0;
+        public static final double wristAngle = 198.0;
+        public static final double extensionDistance = 2.0;
     }
 
     public static final class Position6{ // cone on the ground

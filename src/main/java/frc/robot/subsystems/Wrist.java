@@ -85,12 +85,23 @@ public class Wrist extends SubsystemBase {
         wristMotorController.set(0);
     }
     public void increment(){
-        wristarget = wristarget + 2;
-        m_kwristmoterPID.setReference(wristarget, ControlType.kPosition);
+        if (wristarget + 2 <= WristPID.ForwardLimit){
+            wristarget = wristarget + 2;
+            m_kwristmoterPID.setReference(wristarget, ControlType.kPosition);
+        }
     }
     public void decrement(){
-        wristarget = wristarget - 2;
-        m_kwristmoterPID.setReference(wristarget, ControlType.kPosition);
+        if (wristarget - 2 >= WristPID.ReverseLimit){
+            wristarget = wristarget - 2;
+            m_kwristmoterPID.setReference(wristarget, ControlType.kPosition);
+        }
+    }
+    public boolean Safe(){
+        if (Position()<90 || AtTarget() ){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override
