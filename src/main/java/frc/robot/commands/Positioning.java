@@ -1,11 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import frc.robot.subsystems.*;
 import frc.robot.Constants.MovePID;
@@ -15,10 +11,7 @@ public class Positioning extends SequentialCommandGroup{
     private Wrist m_wrist;
     private ExtendArm m_extend;
     private DriveTrain m_drive;
-    private MoveWrist wristcommand;
-    private MoveArm armcommand;
-
-
+    
     public Positioning(Arm arm, Wrist wrist, ExtendArm extendarm, DriveTrain drive,  double armangle, double wristangle, double extensiondistance, boolean wristFirst) {
         this.m_arm =  arm;
         this.m_wrist = wrist;
@@ -29,7 +22,6 @@ public class Positioning extends SequentialCommandGroup{
         } else {
             m_drive.SetMaxSpeed(MovePID.HighSpeed);
         }
-        //armcommand = new MoveArm(armangle, m_arm);
         if(wristFirst) {
             addCommands(
                 Commands.parallel(
@@ -59,28 +51,6 @@ public class Positioning extends SequentialCommandGroup{
                     )
                 )
             );
-        }
-        
-        /* 
-        if (m_extend.extended){
-            addCommands(
-                new ScheduleCommand( new MoveExtension(extensiondistance, extendarm)).andThen(Commands.waitSeconds(2)),
-                Commands.parallel(
-                    new MoveArm(armangle, m_arm),
-                    new MoveWrist(wristangle, m_wrist)
-                    )
-                );
-        } else{
-            addCommands(
-                new ScheduleCommand( Commands.parallel(
-                        new MoveArm(armangle, m_arm),
-                        new MoveWrist(wristangle, m_wrist))
-                    ).andThen(Commands.waitSeconds(2)),
-                    new MoveExtension(extensiondistance, extendarm)
-                );
-        }
-        //System.out.print(String.format("Target Arm: %.2f Extension: %.2f Wrist: %.2f \n",armangle,extensiondistance, wristangle));
-        
-        */
+        }    
     }
 }

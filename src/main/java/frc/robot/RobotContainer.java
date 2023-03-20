@@ -24,7 +24,6 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
@@ -182,7 +181,7 @@ public class RobotContainer {
       Driverbutton6.whileTrue(new ConditionalCommand(new InstantCommand(m_driveTrain::brake), new InstantCommand(m_driveTrain::brakerelease), m_driveTrain::brake_on));
       DigitalInput proxsense = new DigitalInput(1);
       
-      new Trigger(proxsense::get).onFalse(new CloseManipulator(m_pneumatics)).and(m_pneumatics::manipulator_open);
+      new Trigger(proxsense::get).onFalse(new CloseManipulator(m_pneumatics).andThen(new WaitCommand(0.25))).and(m_pneumatics::manipulator_open);
       //Code to create a trigger that on falsee does the CloseManipulator
       
 
