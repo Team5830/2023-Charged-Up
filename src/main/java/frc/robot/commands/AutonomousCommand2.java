@@ -40,7 +40,7 @@ public class AutonomousCommand2 extends SequentialCommandGroup {
             Pneumatics m_pneumatics) {
         addCommands(
                 new Positioning(m_arm, m_wrist, m_extension, m_driveTrain, Position4.armAngle, Position4.wristAngle,
-                        Position4.extensionDistance, true),
+                        Position4.extensionDistance, false),
                 new OpenManipulator(m_pneumatics),
                 new WaitCommand(0.75),
                 new CloseManipulator(m_pneumatics),
