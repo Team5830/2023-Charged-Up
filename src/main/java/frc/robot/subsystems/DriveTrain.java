@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Constants.*;
 
+import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SerialPort;
 import com.revrobotics.CANSparkMax;
@@ -179,6 +180,10 @@ public class DriveTrain extends SubsystemBase {
 
   public void SetMaxSpeed(double max) {
     maxspeed = max;
+  }
+  public void setautospeed()
+  {
+    SetMaxSpeed(0.5);
   }
     public void OverrideMax(){
       if (MovePID.LowSpeed < maxspeed ){
