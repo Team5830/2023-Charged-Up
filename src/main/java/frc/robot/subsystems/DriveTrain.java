@@ -185,13 +185,17 @@ public class DriveTrain extends SubsystemBase {
   {
     SetMaxSpeed(0.5);
   }
-    public void OverrideMax(){
-      if (MovePID.LowSpeed < maxspeed ){
-        maxspeed=MovePID.LowSpeed;  
-      } else{
-        maxspeed=MovePID.HighSpeed;
-      }
+  public void setStartspeed()
+  {
+    SetMaxSpeed(MovePID.HighSpeed);
+  }
+  public void OverrideMax(){
+    if (MovePID.LowSpeed < maxspeed ){
+      maxspeed=MovePID.LowSpeed;  
+    } else{
+      maxspeed=MovePID.HighSpeed;
     }
+  }
   public double getPitch() {
     return ahrs.getPitch();
   }
