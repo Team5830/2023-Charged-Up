@@ -88,7 +88,7 @@ public class Constants {
     }
 
     public static final class ArmPID {
-        public static final double P = 0.008;
+        public static final double P = 0.009;
         public static final double I = 0.000001;
         public static final double D = 0.005;
         public static final double FF = 0.0;
@@ -100,7 +100,7 @@ public class Constants {
     }
 
     public static final class WristPID {
-        public static final double P = 0.007; //.009;
+        public static final double P = 0.005; //.009;
         public static final double I = 0.0;    //.000003; 
         public static final double D = 0.05;    //.03;
         public static final double FF = 0;
@@ -128,7 +128,7 @@ public class Constants {
     }
     public static final class Position2{ // Pickup Position
         public static final double armAngle = 49.1;
-        public static final double wristAngle = 101.0;
+        public static final double wristAngle = 118.0;
         public static final double extensionDistance = 10.0;
     }
     public static final class Position3{ // Middle Node
@@ -142,7 +142,7 @@ public class Constants {
         public static final double extensionDistance = 21.0;
     }
     public static final class Position5{ // Human player station pickup
-        public static final double armAngle = 226.0;
+        public static final double armAngle = 220.0;
         public static final double wristAngle = 198.0;
         public static final double extensionDistance = 2.0;
     }

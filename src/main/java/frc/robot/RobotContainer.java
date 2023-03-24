@@ -179,11 +179,11 @@ public class RobotContainer {
       Driverbutton5.onTrue(new InstantCommand(m_driveTrain::OverrideMax));
 
       //Driverbutton4.onTrue(new Balance(m_driveTrain).repeatedly());
-      Driverbutton6.whileTrue(new ConditionalCommand(new InstantCommand(m_driveTrain::brake), new InstantCommand(m_driveTrain::brakerelease), m_driveTrain::brake_on));
+      Driverbutton6.whileTrue(new ConditionalCommand( new InstantCommand(m_driveTrain::brakerelease),new InstantCommand(m_driveTrain::brake), m_driveTrain::brake_on));
       DigitalInput proxsense = new DigitalInput(1);
       
       new Trigger(proxsense::get).onFalse(new CloseManipulator(m_pneumatics).andThen(new WaitCommand(0.25))).and(m_pneumatics::manipulator_open);
-      //Code to create a trigger that on falsee does the CloseManipulator
+      //Code to create a trigger that on falsee does the CloseManipulator 
       
 
     

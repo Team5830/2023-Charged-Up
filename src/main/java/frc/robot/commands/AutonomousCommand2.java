@@ -47,7 +47,7 @@ public class AutonomousCommand2 extends SequentialCommandGroup {
                 new Positioning(m_arm, m_wrist, m_extension, m_driveTrain, Position1.armAngle, Position1.wristAngle,
                         Position1.extensionDistance, true),
                 new InstantCommand(m_driveTrain::setautospeed),
-                new Move(-2.5, m_driveTrain),
+                new Move(-2.5, m_driveTrain).withTimeout(2),
                 new Balance(m_driveTrain),
                 new Brake(m_driveTrain));
                 

@@ -23,7 +23,7 @@ public class Move extends PIDCommand {
   public Move(double targetDistanceMeters, DriveTrain drive) {
     super(new PIDController(MovePID.lP, MovePID.lI, MovePID.lD),
         drive::getDistance, targetDistanceMeters, output -> drive.TankDrive(-output, -output), drive);
-    drive.SetMaxSpeed(MovePID.LowSpeed);
+    //drive.SetMaxSpeed(MovePID.LowSpeed);
     //drive.updatePID();
     drive.resetEncoders();
 

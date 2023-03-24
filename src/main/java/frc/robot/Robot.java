@@ -43,7 +43,7 @@ public class Robot extends TimedRobot {
         // autonomous chooser on the dashboard.
         m_robotContainer = RobotContainer.getInstance();
         HAL.report(tResourceType.kResourceType_Framework, tInstances.kFramework_RobotBuilder);
-        CameraServer.startAutomaticCapture(0);
+        //CameraServer.startAutomaticCapture(0);
     }
 
     /**
