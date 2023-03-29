@@ -46,8 +46,9 @@ public class AutonomousCommand1 extends SequentialCommandGroup {
                 new CloseManipulator(m_pneumatics),
                 new Positioning(m_arm, m_wrist, m_extension, m_driveTrain, Position1.armAngle, Position1.wristAngle,
                         Position1.extensionDistance, true),
-                new Move(-4.0, m_driveTrain),
-                new InstantCommand(m_driveTrain::setStartspeed));
+                new InstantCommand(m_driveTrain::setautospeed),
+                new Move(-4.0, m_driveTrain));
+                //new InstantCommand(m_driveTrain::setStartspeed));
     }
 
 }

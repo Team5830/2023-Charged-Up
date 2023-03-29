@@ -128,7 +128,7 @@ public class Constants {
     }
     public static final class Position2{ // Pickup Position
         public static final double armAngle = 49.1;
-        public static final double wristAngle = 118.0;
+        public static final double wristAngle = 110.0;
         public static final double extensionDistance = 10.0;
     }
     public static final class Position3{ // Middle Node
@@ -139,11 +139,11 @@ public class Constants {
     public static final class Position4{ // High node
         public static final double armAngle = 278.0;//278.0
         public static final double wristAngle = 194.0;
-        public static final double extensionDistance = 21.0;
+        public static final double extensionDistance = 20.0;
     }
     public static final class Position5{ // Human player station pickup
-        public static final double armAngle = 220.0;
-        public static final double wristAngle = 198.0;
+        public static final double armAngle = 230.0;
+        public static final double wristAngle = 170.0;
         public static final double extensionDistance = 2.0;
     }
 

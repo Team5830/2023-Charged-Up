@@ -32,7 +32,7 @@ public class Balance extends CommandBase {
     }
     @Override
     public boolean isFinished() {
-        if(Math.abs(drivetrain.getPitch())<12.0 && stable>75) {
+        if(Math.abs(drivetrain.getPitch())<12.0 && stable>65) {
             return true;
                 }
         else {
